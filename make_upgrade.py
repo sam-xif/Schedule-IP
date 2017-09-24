@@ -72,6 +72,8 @@ if message is None:
     print('ERROR: Missing position argument: MESSAGE')
     exit()
 
+
+
 # Function which loops through versions directory, getting migration script with highest version number, which represents the current schema of the database
 def get_most_recent_script():
     files = os.listdir('{0}/versions'.format(repo_dir))
@@ -89,7 +91,7 @@ previous_version_num = re.match(r'([0-9]+).*', previous_script).group(1)
 
 # Create the script using manage.py
 script_process = subprocess.run(['python', 'manage.py', 'make_update_script_for_model', 
-                                 '--oldmodel={0}.versions.{1}.model{2}.metadata'.format(repo_dir, models_dir, previous_version_num), 
+                                 '--oldmodel={0}.model{1}.metadata'.format(models_dir.replace('/', '.').replace('\\', '.'), previous_version_num), 
                                  '--model={0}'.format(model_name)], stdout=subprocess.PIPE)
 script = script_process.stdout
 
@@ -122,10 +124,9 @@ if not dry:
 else:
     upgrade_script_path = '{0}/versions/{1:03d}{2}.py'.format(repo_dir, int(previous_version_num)+1, '_' + message.replace(' ', '_'))
     print('Writing upgrade script > {0}'.format(upgrade_script_path))
-    model_path = '{0]/model{1:03d}.py'.format(models_dir, int(previous_version_num)+1)
+    model_path = '{0}/model{1:03d}.py'.format(models_dir, int(previous_version_num)+1)
     print('Copying current {0} > {1}'.format(schema_file, model_path))
 
-    
     print('\nUpgrade script has been created. Run `python manage.py upgrade` to perform the upgrade.')
     print('To downgrade to a previous version, run `python manage.py downgrade <version>`, then delete the upgrade script that was created in the {0}/versions directory'.format(repo_dir))
     print('\nDry run complete. No files were modified.')

@@ -1,1 +1,3 @@
-__pycache__ 
+__pycache__/
+migrate_repo/__pychache__/
+src/__pycache__/

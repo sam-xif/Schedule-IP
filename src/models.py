@@ -5,7 +5,7 @@ This file should contain a reflection of the database schema.
 The classes are linked to tables in the database with the sqlalchemy Declarative API.
 
 If a change to this schema is made, it is important to follow these steps to perform a migration of the database:
-1. Run the command, replacing <name> with a short description of the upgrade: python make_upgrade.py "<name>"
+1. Run the command, replacing <name> with a short description of the upgrade: python make_migration.py "<name>"
 2. Run the command: python manage.py upgrade
 """
 
@@ -34,11 +34,10 @@ class Student(Base):
     
     ID = Column(Integer, primary_key=True)
     name = Column(String)
-    _class = Column(Integer)
+    graduatingClass = Column(Integer)
     studentId = Column(String)
     sex = Column(String)
     cluster = Column(String)
-    #date_of_birth = Column(String)
     
     def __repr__(self):
         return "Student<name={0}, _class={1}, studentId={2}, sex={3}>".format(self.name, self._class, self.studentId, self.sex);

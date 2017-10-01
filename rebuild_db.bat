@@ -5,12 +5,11 @@ rem        Assumes database files have .db extension
 rem Requires sed
 rem TODO: Remove requirement for sed by using the migrate command to generate a new management script
 
-
 rem Change any of these variables to reflect your environment
 set REPO=migrate_repo
 set EXT=db
 set MANAGE_SCRIPT=manage.py
-set DB_NAME=schedule.db
+set DB_NAME=schedule.%EXT%
 
 if not "%1"=="" (
     set DB_NAME=%1

@@ -8,7 +8,7 @@ If a change to this schema is made, it is important to follow these steps to per
 1. Run the command, replacing <name> with a short description of the upgrade: python make_migration.py "<name>"
 2. Run the command: python manage.py upgrade
 """
-9
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import *
 Base = declarative_base()

@@ -106,7 +106,6 @@ class Request(Base):
     course6 = Column(String)
     topPriority = Column(String)
 
-
 """
 DO NOT REMOVE THIS LINE
 KEEP IT AT THE BOTTOM OF THE FILE

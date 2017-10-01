@@ -13,6 +13,8 @@ engine = create_engine('sqlite+pysqlite:///schedule.db', module=sqlite, echo=DEB
 print(engine)
 allStudents = []
 
+allStudents = []
+
 if __name__=="__main__":
 
     ifile  = open('Contact Information.csv', "rt")
@@ -20,8 +22,12 @@ if __name__=="__main__":
     i = 0
     Session = sessionmaker(bind=engine)
     session1 = Session()
+<<<<<<< HEAD
     for row in read:
         print(row)
+=======
+    for row in read :
+>>>>>>> 65d6507a6bf76ddca2e1079acd11499f7eef9b4a
         allStudents[i] = Student(name=row[2], graduatingClass=row[3], studentId=row[4], sex=row[5],
             cluster=row[6], yearlong1=row[7], yearlong2=row[8], yearlong3=row[9], yearlong4=row[10],
             engElectiveTop=row[11], engElective1=row[12], engElective2=row[13], engElective3=row[14],

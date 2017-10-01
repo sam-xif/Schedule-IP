@@ -8,7 +8,7 @@ If a change to this schema is made, it is important to follow these steps to per
 1. Run the command, replacing <name> with a short description of the upgrade: python make_migration.py "<name>"
 2. Run the command: python manage.py upgrade
 """
-
+9
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import *
 Base = declarative_base()
@@ -40,7 +40,7 @@ class Student(Base):
     cluster = Column(String)
     
     def __repr__(self):
-        return "Student<name={0}, _class={1}, studentId={2}, sex={3}>".format(self.name, self._class, self.studentId, self.sex);
+        return "Student<name={0}, graduatingClass={1}, studentId={2}, sex={3}>".format(self.name, self.graduatingClass, self.studentId, self.sex);
 
     
 class Schedule(Base):

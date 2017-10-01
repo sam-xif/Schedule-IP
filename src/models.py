@@ -16,7 +16,7 @@ Base = declarative_base()
 
 # Classes
 class Class(Base):
-    __tablename__= 'class_'
+    __tablename__= 'classes'
 
     ID = Column(Integer, primary_key=True)
     className = Column(String)
@@ -30,7 +30,7 @@ class Class(Base):
         pass
 
 class Student(Base):
-    __tablename__ = 'student'
+    __tablename__ = 'students'
 
     ID = Column(Integer, primary_key=True)
     name = Column(String)
@@ -39,6 +39,27 @@ class Student(Base):
     sex = Column(String)
     cluster = Column(String)
 
+    def __repr__(self):
+        return "Student<name={0}, _class={1}, studentId={2}, sex={3}>".format(self.name, self._class, self.studentId, self.sex)
+
+class Schedule(Base):
+    __tablename__ = 'schedules'
+
+    ID = Column(Integer, primary_key=True)
+    student = Column(Integer)
+    _class = Column(Integer)
+
+class Request(Base):
+    """
+    Database object that represents a set of course requests.
+    There is a one-to-one mapping between Request objects and Student objects
+    """
+   
+    __tablename__ = "requests"
+    ID = Column(Integer, primary_key=True)
+    student = Column(Integer)
+
+    # Other course request fields
     yearlong1 = Column(String)
     yearlong2 = Column(String)
     yearlong3 = Column(String)
@@ -84,17 +105,6 @@ class Student(Base):
     courseLoad= Column(String)
     course6 = Column(String)
     topPriority = Column(String)
-
-    def __repr__(self):
-        return "Student<name={0}, graduatingClass={1}, studentId={2}, sex={3}>".format(self.name, self.graduatingClass, self.studentId, self.sex);
-
-
-class Schedule(Base):
-    __tablename__ = 'schedule'
-
-    ID = Column(Integer, primary_key=True)
-    student = Column(Integer)
-    _class = Column(Integer)
 
 
 """

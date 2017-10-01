@@ -10,7 +10,7 @@ from models import *
 DEBUG=True
 
 engine = create_engine('sqlite+pysqlite:///schedule.db', module=sqlite, echo=DEBUG)
-
+print(engine)
 allStudents = []
 
 if __name__=="__main__":
@@ -20,7 +20,8 @@ if __name__=="__main__":
     i = 0
     Session = sessionmaker(bind=engine)
     session1 = Session()
-    for row in read :
+    for row in read:
+        print(row)
         allStudents[i] = Student(name=row[2], graduatingClass=row[3], studentId=row[4], sex=row[5],
             cluster=row[6], yearlong1=row[7], yearlong2=row[8], yearlong3=row[9], yearlong4=row[10],
             engElectiveTop=row[11], engElective1=row[12], engElective2=row[13], engElective3=row[14],

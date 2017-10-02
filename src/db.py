@@ -31,8 +31,9 @@ if __name__=="__main__":
     Session = sessionmaker(bind=engine)
     session1 = Session()
     for row in read:
-        allStudents[i] = Student(name=row[2], graduatingClass=row[3], studentId=row[4], sex=row[5],
-            cluster=row[6], yearlong1=row[7], yearlong2=row[8], yearlong3=row[9], yearlong4=row[10],
+        stu = Student(name=row[2], graduatingClass=row[3], studentId=row[4], sex=row[5],
+            cluster=row[6])
+        requests = Request(yearlong1=row[7], yearlong2=row[8], yearlong3=row[9], yearlong4=row[10],
             engElectiveTop=row[11], engElective1=row[12], engElective2=row[13], engElective3=row[14],
             engElective4=row[15], engElective5=row[16], termContained1=row[17], cont1alt1=row[18],
             cont1alt2=row[19], cont1alt3=row[20], cont1alt4=row[21], termContained2=row[22],
@@ -41,8 +42,9 @@ if __name__=="__main__":
             cont4alt1=row[33], cont4alt2=row[34], cont4alt3=row[35], cont4alt4=row[36], termContained5=row[37],
             cont5alt1=row[38], cont5alt2=row[39], cont5alt3=row[40], cont5alt4=row[41], courseLoad=row[42],
             course6=row[43], topPriority=row[44])
+        print([row[j] for j in range(len(row))])
         i+=1
-
+    exit()
     x = 1
     for x in len(allStudents):
         session1.add(allStudents[x])

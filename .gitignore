@@ -2,4 +2,4 @@ __pycache__/
 *.py[cod]
 # migrate_repo/__pychache__/
 # src/__pycache__/
-schedule.db
+*.db

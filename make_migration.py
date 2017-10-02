@@ -24,8 +24,9 @@ while i < len(sys.argv):
     if sys.argv[i] == '-h' or sys.argv[i] =='--help' or sys.argv[i] == 'help':
         print('Author: Sam Xifaras', 
               '',
-              'Usage: python make_upgrade.py <options> MESSAGE',
+              'Usage: python make_upgrade.py [options] MESSAGE',
               'Description: Compares the current database schema to that in the source code', 
+              'Note: All paths given as arguments to the command must be relative paths.',
               '',
               'Options:',
               '  -h, --help : Shows this message',

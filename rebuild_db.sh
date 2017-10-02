@@ -9,7 +9,6 @@ touch $DBNAME
 
 python $MANAGE_SCRIPT version_control --url=sqlite:///$DBNAME
 
-sed -i "s;sqlite:///.*\.${EXT};sqlite:///${DBNAME};g" $MANAGE_SCRIPT
+sed -i.bu "s;sqlite:///.*\.${EXT};sqlite:///${DBNAME};g" $MANAGE_SCRIPT
 
 python $MANAGE_SCRIPT upgrade
-

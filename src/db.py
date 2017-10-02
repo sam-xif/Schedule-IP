@@ -17,6 +17,14 @@ allStudents = []
 
 if __name__=="__main__":
 
+    """
+    NOTE: This code currently does not work
+    The course requests should not be stored in the Student object, but the data from the csv should instead be used to map Request objects to Students that already exist in the students table
+
+    For this test, students should be added from the csv first, then Request objects should be created, then the two should be linked to each other.
+    """
+
+
     ifile  = open('Contact Information.csv', "rt")
     read = csv.reader(ifile)
     i = 0

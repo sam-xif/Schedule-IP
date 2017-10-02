@@ -1,5 +1,10 @@
-import src.models
-import src.pymodels
+"""
+This command must be run from the directory where the database is, or it won't work.
+Alternatively, you can change the path in the CONNECT_STRING variable
+"""
+
+import models
+import pymodels
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -26,7 +31,7 @@ def integrity_test():
     # Generate 1000 objects
     students = []
     for i in range(1000):
-        students.append(src.models.Student(name=randomString(20), graduatingClass=randint(2015, 2020), studentId=randomString(7), sex=randomString(5), cluster=randomString(10)))
+        students.append(models.Student(name=randomString(20), graduatingClass=randint(2015, 2020), studentId=randomString(7), sex=randomString(5), cluster=randomString(10)))
        
     # Add student objects to database
     for student in students:
@@ -34,7 +39,8 @@ def integrity_test():
     
     session1.commit()
 
-    studentObjects = [src.pymodels.Student.__import__(x) for x in students] 
+    # studentObjects must be populated after the transaction is committed so that the primary key IDs are assigned
+    studentObjects = [pymodels.Student.__import__(x) for x in students] 
 
     session1.close()
     
@@ -42,7 +48,7 @@ def integrity_test():
     print("Opening new session...")
     session2 = Session()
     print("Querying database...")
-    student_query = [src.pymodels.Student.__import__(x) for x in session2.query(src.models.Student).all()]
+    student_query = [pymodels.Student.__import__(x) for x in session2.query(models.Student).all()]
     
     success = True
     for i in range(1000):

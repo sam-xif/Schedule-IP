@@ -1,4 +1,4 @@
-import src.models as models
+import models
 
 class PyModelBase:
     """ PyModelBase interface"""

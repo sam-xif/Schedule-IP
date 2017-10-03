@@ -3,7 +3,6 @@
 import models
 
 class PyModelBase:
-    
     @staticmethod
     def __import__(data):
         raise NotImplementedError
@@ -14,8 +13,6 @@ class PyModelBase:
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
     
-    def __cmp__(self, other):
-        return self.__dict__ == other.__dict__
 
 
 class Class(PyModelBase):
@@ -38,6 +35,9 @@ class Class(PyModelBase):
         
     def __export__(self):
         return models.Class(ID=self.ID, className=self.className, classCode=self.classCode, periodCode=self.periodCode, section=self.section, room=self.room, instructor=self.instructor, slotsRemaining=self.slotsRemaining)
+        
+    def __repr__(self):
+        return "Class<ID={}, className={}, classCode={}, periodCode={}, section={}, room={}, instructor={}, slotsRemaining={}".format(ID, className, classCode, periodCode, section, room, instructor, slotsRemaining)
 
 
 class Student(PyModelBase):
@@ -59,6 +59,9 @@ class Student(PyModelBase):
         
     def __export__(self):
         return models.Student(ID=self.ID, name=self.name, graduatingClass=self.graduatingClass, studentId=self.studentId, sex=self.sex, cluster=self.cluster, priority=self.priority)
+        
+    def __repr__(self):
+        return "Student<ID={}, name={}, graduatingClass={}, studentId={}, sex={}, cluster={}, priority={}".format(ID, name, graduatingClass, studentId, sex, cluster, priority)
 
 
 class Schedule(PyModelBase):
@@ -76,6 +79,9 @@ class Schedule(PyModelBase):
         
     def __export__(self):
         return models.Schedule(ID=self.ID, student=self.student, _class=self._class)
+        
+    def __repr__(self):
+        return "Schedule<ID={}, student={}, _class={}".format(ID, student, _class)
 
 
 class Request(PyModelBase):
@@ -130,4 +136,7 @@ class Request(PyModelBase):
         
     def __export__(self):
         return models.Request(ID=self.ID, student=self.student, yearlong1=self.yearlong1, yearlong2=self.yearlong2, yearlong3=self.yearlong3, yearlong4=self.yearlong4, engElectiveTop=self.engElectiveTop, engElective1=self.engElective1, engElective2=self.engElective2, engElective3=self.engElective3, engElective4=self.engElective4, engElective5=self.engElective5, termContained1=self.termContained1, cont1alt1=self.cont1alt1, cont1alt2=self.cont1alt2, cont1alt3=self.cont1alt3, cont1alt4=self.cont1alt4, termContained2=self.termContained2, cont2alt1=self.cont2alt1, cont2alt2=self.cont2alt2, cont2alt3=self.cont2alt3, cont2alt4=self.cont2alt4, termContained3=self.termContained3, cont3alt1=self.cont3alt1, cont3alt2=self.cont3alt2, cont3alt3=self.cont3alt3, cont3alt4=self.cont3alt4, termContained4=self.termContained4, cont4alt1=self.cont4alt1, cont4alt2=self.cont4alt2, cont4alt3=self.cont4alt3, cont4alt4=self.cont4alt4, termContained5=self.termContained5, cont5alt1=self.cont5alt1, cont5alt2=self.cont5alt2, cont5alt3=self.cont5alt3, cont5alt4=self.cont5alt4, courseLoad=self.courseLoad, course6=self.course6, topPriority=self.topPriority)
+        
+    def __repr__(self):
+        return "Request<ID={}, student={}, yearlong1={}, yearlong2={}, yearlong3={}, yearlong4={}, engElectiveTop={}, engElective1={}, engElective2={}, engElective3={}, engElective4={}, engElective5={}, termContained1={}, cont1alt1={}, cont1alt2={}, cont1alt3={}, cont1alt4={}, termContained2={}, cont2alt1={}, cont2alt2={}, cont2alt3={}, cont2alt4={}, termContained3={}, cont3alt1={}, cont3alt2={}, cont3alt3={}, cont3alt4={}, termContained4={}, cont4alt1={}, cont4alt2={}, cont4alt3={}, cont4alt4={}, termContained5={}, cont5alt1={}, cont5alt2={}, cont5alt3={}, cont5alt4={}, courseLoad={}, course6={}, topPriority={}".format(ID, student, yearlong1, yearlong2, yearlong3, yearlong4, engElectiveTop, engElective1, engElective2, engElective3, engElective4, engElective5, termContained1, cont1alt1, cont1alt2, cont1alt3, cont1alt4, termContained2, cont2alt1, cont2alt2, cont2alt3, cont2alt4, termContained3, cont3alt1, cont3alt2, cont3alt3, cont3alt4, termContained4, cont4alt1, cont4alt2, cont4alt3, cont4alt4, termContained5, cont5alt1, cont5alt2, cont5alt3, cont5alt4, courseLoad, course6, topPriority)
 

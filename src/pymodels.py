@@ -16,7 +16,7 @@ class PyModelBase:
 
 
 class Class(PyModelBase):
-    def __init__(self, ID, className, classCode, periodCode, section, room, instructor, slotsRemaining):
+    def __init__(self, ID, className, classCode, periodCode, section, room, instructor, slotsRemaining, targetCapacity, maxCapacity):
         self.ID=ID
         self.className=className
         self.classCode=classCode
@@ -25,19 +25,21 @@ class Class(PyModelBase):
         self.room=room
         self.instructor=instructor
         self.slotsRemaining=slotsRemaining
+        self.targetCapacity=targetCapacity
+        self.maxCapacity=maxCapacity
         
     @staticmethod
     def __import__(data):
         if type(data) is not models.Class or data is None:
             raise Exception("Invalid argument to __import__")
 
-        return Class(data.ID, data.className, data.classCode, data.periodCode, data.section, data.room, data.instructor, data.slotsRemaining)
+        return Class(data.ID, data.className, data.classCode, data.periodCode, data.section, data.room, data.instructor, data.slotsRemaining, data.targetCapacity, data.maxCapacity)
         
     def __export__(self):
-        return models.Class(ID=self.ID, className=self.className, classCode=self.classCode, periodCode=self.periodCode, section=self.section, room=self.room, instructor=self.instructor, slotsRemaining=self.slotsRemaining)
+        return models.Class(ID=self.ID, className=self.className, classCode=self.classCode, periodCode=self.periodCode, section=self.section, room=self.room, instructor=self.instructor, slotsRemaining=self.slotsRemaining, targetCapacity=self.targetCapacity, maxCapacity=self.maxCapacity)
         
     def __repr__(self):
-        return "Class<ID={}, className={}, classCode={}, periodCode={}, section={}, room={}, instructor={}, slotsRemaining={}".format(ID, className, classCode, periodCode, section, room, instructor, slotsRemaining)
+        return "Class<ID={}, className={}, classCode={}, periodCode={}, section={}, room={}, instructor={}, slotsRemaining={}, targetCapacity={}, maxCapacity={}".format(ID, className, classCode, periodCode, section, room, instructor, slotsRemaining, targetCapacity, maxCapacity)
 
 
 class Student(PyModelBase):
@@ -65,9 +67,11 @@ class Student(PyModelBase):
 
 
 class Schedule(PyModelBase):
-    def __init__(self, ID, student, _class):
+    def __init__(self, ID, student_id, student, _class_id, _class):
         self.ID=ID
+        self.student_id=student_id
         self.student=student
+        self._class_id=_class_id
         self._class=_class
         
     @staticmethod
@@ -75,18 +79,19 @@ class Schedule(PyModelBase):
         if type(data) is not models.Schedule or data is None:
             raise Exception("Invalid argument to __import__")
 
-        return Schedule(data.ID, data.student, data._class)
+        return Schedule(data.ID, data.student_id, data.student, data._class_id, data._class)
         
     def __export__(self):
-        return models.Schedule(ID=self.ID, student=self.student, _class=self._class)
+        return models.Schedule(ID=self.ID, student_id=self.student_id, student=self.student, _class_id=self._class_id, _class=self._class)
         
     def __repr__(self):
-        return "Schedule<ID={}, student={}, _class={}".format(ID, student, _class)
+        return "Schedule<ID={}, student_id={}, student={}, _class_id={}, _class={}".format(ID, student_id, student, _class_id, _class)
 
 
 class Request(PyModelBase):
-    def __init__(self, ID, student, yearlong1, yearlong2, yearlong3, yearlong4, engElectiveTop, engElective1, engElective2, engElective3, engElective4, engElective5, termContained1, cont1alt1, cont1alt2, cont1alt3, cont1alt4, termContained2, cont2alt1, cont2alt2, cont2alt3, cont2alt4, termContained3, cont3alt1, cont3alt2, cont3alt3, cont3alt4, termContained4, cont4alt1, cont4alt2, cont4alt3, cont4alt4, termContained5, cont5alt1, cont5alt2, cont5alt3, cont5alt4, courseLoad, course6, topPriority):
+    def __init__(self, ID, student_id, student, yearlong1, yearlong2, yearlong3, yearlong4, engElectiveTop, engElective1, engElective2, engElective3, engElective4, engElective5, termContained1, cont1alt1, cont1alt2, cont1alt3, cont1alt4, termContained2, cont2alt1, cont2alt2, cont2alt3, cont2alt4, termContained3, cont3alt1, cont3alt2, cont3alt3, cont3alt4, termContained4, cont4alt1, cont4alt2, cont4alt3, cont4alt4, termContained5, cont5alt1, cont5alt2, cont5alt3, cont5alt4, courseLoad, course6, topPriority):
         self.ID=ID
+        self.student_id=student_id
         self.student=student
         self.yearlong1=yearlong1
         self.yearlong2=yearlong2
@@ -132,11 +137,11 @@ class Request(PyModelBase):
         if type(data) is not models.Request or data is None:
             raise Exception("Invalid argument to __import__")
 
-        return Request(data.ID, data.student, data.yearlong1, data.yearlong2, data.yearlong3, data.yearlong4, data.engElectiveTop, data.engElective1, data.engElective2, data.engElective3, data.engElective4, data.engElective5, data.termContained1, data.cont1alt1, data.cont1alt2, data.cont1alt3, data.cont1alt4, data.termContained2, data.cont2alt1, data.cont2alt2, data.cont2alt3, data.cont2alt4, data.termContained3, data.cont3alt1, data.cont3alt2, data.cont3alt3, data.cont3alt4, data.termContained4, data.cont4alt1, data.cont4alt2, data.cont4alt3, data.cont4alt4, data.termContained5, data.cont5alt1, data.cont5alt2, data.cont5alt3, data.cont5alt4, data.courseLoad, data.course6, data.topPriority)
+        return Request(data.ID, data.student_id, data.student, data.yearlong1, data.yearlong2, data.yearlong3, data.yearlong4, data.engElectiveTop, data.engElective1, data.engElective2, data.engElective3, data.engElective4, data.engElective5, data.termContained1, data.cont1alt1, data.cont1alt2, data.cont1alt3, data.cont1alt4, data.termContained2, data.cont2alt1, data.cont2alt2, data.cont2alt3, data.cont2alt4, data.termContained3, data.cont3alt1, data.cont3alt2, data.cont3alt3, data.cont3alt4, data.termContained4, data.cont4alt1, data.cont4alt2, data.cont4alt3, data.cont4alt4, data.termContained5, data.cont5alt1, data.cont5alt2, data.cont5alt3, data.cont5alt4, data.courseLoad, data.course6, data.topPriority)
         
     def __export__(self):
-        return models.Request(ID=self.ID, student=self.student, yearlong1=self.yearlong1, yearlong2=self.yearlong2, yearlong3=self.yearlong3, yearlong4=self.yearlong4, engElectiveTop=self.engElectiveTop, engElective1=self.engElective1, engElective2=self.engElective2, engElective3=self.engElective3, engElective4=self.engElective4, engElective5=self.engElective5, termContained1=self.termContained1, cont1alt1=self.cont1alt1, cont1alt2=self.cont1alt2, cont1alt3=self.cont1alt3, cont1alt4=self.cont1alt4, termContained2=self.termContained2, cont2alt1=self.cont2alt1, cont2alt2=self.cont2alt2, cont2alt3=self.cont2alt3, cont2alt4=self.cont2alt4, termContained3=self.termContained3, cont3alt1=self.cont3alt1, cont3alt2=self.cont3alt2, cont3alt3=self.cont3alt3, cont3alt4=self.cont3alt4, termContained4=self.termContained4, cont4alt1=self.cont4alt1, cont4alt2=self.cont4alt2, cont4alt3=self.cont4alt3, cont4alt4=self.cont4alt4, termContained5=self.termContained5, cont5alt1=self.cont5alt1, cont5alt2=self.cont5alt2, cont5alt3=self.cont5alt3, cont5alt4=self.cont5alt4, courseLoad=self.courseLoad, course6=self.course6, topPriority=self.topPriority)
+        return models.Request(ID=self.ID, student_id=self.student_id, student=self.student, yearlong1=self.yearlong1, yearlong2=self.yearlong2, yearlong3=self.yearlong3, yearlong4=self.yearlong4, engElectiveTop=self.engElectiveTop, engElective1=self.engElective1, engElective2=self.engElective2, engElective3=self.engElective3, engElective4=self.engElective4, engElective5=self.engElective5, termContained1=self.termContained1, cont1alt1=self.cont1alt1, cont1alt2=self.cont1alt2, cont1alt3=self.cont1alt3, cont1alt4=self.cont1alt4, termContained2=self.termContained2, cont2alt1=self.cont2alt1, cont2alt2=self.cont2alt2, cont2alt3=self.cont2alt3, cont2alt4=self.cont2alt4, termContained3=self.termContained3, cont3alt1=self.cont3alt1, cont3alt2=self.cont3alt2, cont3alt3=self.cont3alt3, cont3alt4=self.cont3alt4, termContained4=self.termContained4, cont4alt1=self.cont4alt1, cont4alt2=self.cont4alt2, cont4alt3=self.cont4alt3, cont4alt4=self.cont4alt4, termContained5=self.termContained5, cont5alt1=self.cont5alt1, cont5alt2=self.cont5alt2, cont5alt3=self.cont5alt3, cont5alt4=self.cont5alt4, courseLoad=self.courseLoad, course6=self.course6, topPriority=self.topPriority)
         
     def __repr__(self):
-        return "Request<ID={}, student={}, yearlong1={}, yearlong2={}, yearlong3={}, yearlong4={}, engElectiveTop={}, engElective1={}, engElective2={}, engElective3={}, engElective4={}, engElective5={}, termContained1={}, cont1alt1={}, cont1alt2={}, cont1alt3={}, cont1alt4={}, termContained2={}, cont2alt1={}, cont2alt2={}, cont2alt3={}, cont2alt4={}, termContained3={}, cont3alt1={}, cont3alt2={}, cont3alt3={}, cont3alt4={}, termContained4={}, cont4alt1={}, cont4alt2={}, cont4alt3={}, cont4alt4={}, termContained5={}, cont5alt1={}, cont5alt2={}, cont5alt3={}, cont5alt4={}, courseLoad={}, course6={}, topPriority={}".format(ID, student, yearlong1, yearlong2, yearlong3, yearlong4, engElectiveTop, engElective1, engElective2, engElective3, engElective4, engElective5, termContained1, cont1alt1, cont1alt2, cont1alt3, cont1alt4, termContained2, cont2alt1, cont2alt2, cont2alt3, cont2alt4, termContained3, cont3alt1, cont3alt2, cont3alt3, cont3alt4, termContained4, cont4alt1, cont4alt2, cont4alt3, cont4alt4, termContained5, cont5alt1, cont5alt2, cont5alt3, cont5alt4, courseLoad, course6, topPriority)
+        return "Request<ID={}, student_id={}, student={}, yearlong1={}, yearlong2={}, yearlong3={}, yearlong4={}, engElectiveTop={}, engElective1={}, engElective2={}, engElective3={}, engElective4={}, engElective5={}, termContained1={}, cont1alt1={}, cont1alt2={}, cont1alt3={}, cont1alt4={}, termContained2={}, cont2alt1={}, cont2alt2={}, cont2alt3={}, cont2alt4={}, termContained3={}, cont3alt1={}, cont3alt2={}, cont3alt3={}, cont3alt4={}, termContained4={}, cont4alt1={}, cont4alt2={}, cont4alt3={}, cont4alt4={}, termContained5={}, cont5alt1={}, cont5alt2={}, cont5alt3={}, cont5alt4={}, courseLoad={}, course6={}, topPriority={}".format(ID, student_id, student, yearlong1, yearlong2, yearlong3, yearlong4, engElectiveTop, engElective1, engElective2, engElective3, engElective4, engElective5, termContained1, cont1alt1, cont1alt2, cont1alt3, cont1alt4, termContained2, cont2alt1, cont2alt2, cont2alt3, cont2alt4, termContained3, cont3alt1, cont3alt2, cont3alt3, cont3alt4, termContained4, cont4alt1, cont4alt2, cont4alt3, cont4alt4, termContained5, cont5alt1, cont5alt2, cont5alt3, cont5alt4, courseLoad, course6, topPriority)
 

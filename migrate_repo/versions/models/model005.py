@@ -23,15 +23,13 @@ class Class(Base):
     __tablename__= 'classes'
 
     ID = Column(Integer, primary_key=True)
-    className = Column(String) # The name of the class, such as 'AP BC Calculus'
-    classCode = Column(String) # Class code is the internal name of the class, such as 'MTH-590'
+    className = Column(String)
+    classCode = Column(String)
     periodCode = Column(Integer)
     section = Column(Integer)
     room = Column(String)
     instructor = Column(String)
     slotsRemaining = Column(Integer)
-    targetCapacity = Column(Integer)
-    maxCapacity = Column(Integer)
 
 class Student(Base):
     __tablename__ = 'students'

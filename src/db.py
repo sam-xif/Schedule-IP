@@ -52,7 +52,8 @@ if __name__=="__main__":
     for x in range(len(allStudents)):
         session1.add(allStudents[x])
         session1.add(allRequests[x])
-        session1.commit()
+    
+    session1.commit()
 
     courses = open('src/F17 Master Schedule Sept27_CS.csv', "rt")
     readCourses = csv.reader(courses)
@@ -103,47 +104,47 @@ if __name__=="__main__":
             course = str(row).split(',')[0][:3]
             if (course == "ARA"):
                 arabic.append(row)
-            else if (course == "ART"):
+            elif (course == "ART"):
                 art.append(row)
-            else if (course == "BIO"):
+            elif (course == "BIO"):
                 biology.append(row)
-            else if (course == "CHI"):
+            elif (course == "CHI"):
                 chinese.append(row)
-            else if (course == "CHM"):
+            elif (course == "CHM"):
                 chemistry.append(row)
-            else if (course == "CLA"):
+            elif (course == "CLA"):
                 classics.append(row)
-            else if (course == "EBI"):
+            elif (course == "EBI"):
                 empathy.append(row)
-            else if (course == "ENG"):
+            elif (course == "ENG"):
                 english.append(row)
-            else if (course == "FRE"):
+            elif (course == "FRE"):
                 french.append(row)
-            else if (course == "GER"):
+            elif (course == "GER"):
                 german.append(row)
-            else if (course == "HSS"):
+            elif (course == "HSS"):
                 history.append(row)
-            else if (course == "JPN"):
+            elif (course == "JPN"):
                 japanese.append(row)
-            else if (course == "LTN"):
+            elif (course == "LTN"):
                 latin.append(row)
-            else if (course == "MTH"):
+            elif (course == "MTH"):
                 math.append(row)
-            else if (course == "MUS"):
+            elif (course == "MUS"):
                 music.append(row)
-            else if (course == "PHD"):
+            elif (course == "PHD"):
                 phd.append(row)
-            else if (course == "PHR"):
+            elif (course == "PHR"):
                 relphil.append(row)
-            else if (course == "PHY"):
+            elif (course == "PHY"):
                 physics.append(row)
-            else if (course == "RUS"):
+            elif (course == "RUS"):
                 russian.append(row)
-            else if (course == "SCI"):
+            elif (course == "SCI"):
                 science.append(row)
-            else if (course == "SPA"):
+            elif (course == "SPA"):
                 spanish.append(row)
-            else if (course == "THD"):
+            elif (course == "THD"):
                 theater.append(row)
             else:
                 print("The course code: " + course + " could not be evaluated")

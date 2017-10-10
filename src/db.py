@@ -4,6 +4,7 @@ import csv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlite3 import dbapi2 as sqlite
+from random import randint
 
 from models import *
 
@@ -52,3 +53,129 @@ if __name__=="__main__":
         session1.add(allStudents[x])
         session1.add(allRequests[x])
         session1.commit()
+
+    courses = open('src/F17 Master Schedule Sept27_CS.csv', "rt")
+    readCourses = csv.reader(courses)
+    session2 = Session()
+    first = True
+
+
+
+    arabic = [] #ARA
+    art = [] #ART
+    biology = [] #BIO
+    chinese = [] #CHI
+    chemistry = [] #CHM
+    classics = [] #CLA
+    empathy = [] #EBI
+    english = [] #ENG
+    french = [] #FRE
+    german = [] #GER
+    history = [] #HSS
+    japanese = [] #JPN
+    latin = [] #LTN
+    math = [] #MTH
+    music = [] #MUS
+    phd = [] #PHD
+    relphil = [] #PHR
+    physics = [] #PHY
+    russian = [] #RUS
+    science = [] #SCI
+    spanish = [] #SPA
+    theater = [] #THD
+
+    languages = []
+    languages.extend(arabic, chinese, classics, french, german, japanese, latin, russian, spanish)
+
+    sciences = []
+    sciences.extend(biology, chemistry, physics, science)
+
+    sixth = []
+    sixth.extend(art, music, theater, phd, empathy)
+
+    others = []
+    others.extend(history, relphil)
+
+    for row in readCourses:
+        if (first):
+            first = False
+        else:
+            course = str(row).split(',')[0][:3]
+            if (course == "ARA"):
+                arabic.append(row)
+            else if (course == "ART"):
+                art.append(row)
+            else if (course == "BIO"):
+                biology.append(row)
+            else if (course == "CHI"):
+                chinese.append(row)
+            else if (course == "CHM"):
+                chemistry.append(row)
+            else if (course == "CLA"):
+                classics.append(row)
+            else if (course == "EBI"):
+                empathy.append(row)
+            else if (course == "ENG"):
+                english.append(row)
+            else if (course == "FRE"):
+                french.append(row)
+            else if (course == "GER"):
+                german.append(row)
+            else if (course == "HSS"):
+                history.append(row)
+            else if (course == "JPN"):
+                japanese.append(row)
+            else if (course == "LTN"):
+                latin.append(row)
+            else if (course == "MTH"):
+                math.append(row)
+            else if (course == "MUS"):
+                music.append(row)
+            else if (course == "PHD"):
+                phd.append(row)
+            else if (course == "PHR"):
+                relphil.append(row)
+            else if (course == "PHY"):
+                physics.append(row)
+            else if (course == "RUS"):
+                russian.append(row)
+            else if (course == "SCI"):
+                science.append(row)
+            else if (course == "SPA"):
+                spanish.append(row)
+            else if (course == "THD"):
+                theater.append(row)
+            else:
+                print("The course code: " + course + " could not be evaluated")
+
+    for r in allStudents: #THIS CREATES A RANDOM SET OF CLASSES
+        classReq = [] # array of courses to be allocated to a student
+        # rquirements vary depending on class of student
+        # 30% chance that they take 6 classes and 70 that they take 5
+
+        # For some reason, half of the courses in the course list got cut out of the csv
+
+        six = (randint(1,10) > 7)
+        print("Do they take 6 classes? " + six)
+        class1 = math[randint(1,len(math))].split(',')[0] #this is their math class
+        classReq.append(class1)
+
+        language = randint(1,len(languages))
+        class2 = languages[language][randint(1,len(languages[language]))].split(',')[0] #This is their language class
+        classReq.append(class2)
+
+        class3 = english[randint(1,len(english))].split(',')[0] #this is their english class
+        classReq.append(class3)
+
+        sciClass = randint(1,len(sciences))
+        class4 = sciences[sciClass][randint(1,len(sciences[sciClass]))].split(',')[0] #this is their science class
+        classReq.append(class4)
+
+        otherClass = randint(1,len(others))
+        class5 = others[otherClass][randint(1,len(others[otherClass]))].split(',')[0] #other class (history or relphil)
+        classReq.append(class5)
+
+        if (six):
+            sixthClass = randint(1,len(sixth))
+            class6 = sixth[sixthClass][randint(1,len(sixth[sixthClass]))].split(',')[0] #assuming 6th class is a theater/art
+            classReq.append(class6)

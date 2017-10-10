@@ -3,3 +3,5 @@ __pycache__/
 # migrate_repo/__pychache__/
 # src/__pycache__/
 *.db
+*.bu
+*.csv

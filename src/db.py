@@ -11,6 +11,7 @@ DEBUG=True
 
 engine = create_engine('sqlite+pysqlite:///schedule.db', module=sqlite, echo=DEBUG)
 print(engine)
+
 allStudents = []
 
 allRequests = []
@@ -23,7 +24,6 @@ if __name__=="__main__":
 
     For this test, students should be added from the csv first, then Request objects should be created, then the two should be linked to each other.
     """
-
 
     ifile  = open('src/Contact Information.csv', "rt")
     read = csv.reader(ifile)

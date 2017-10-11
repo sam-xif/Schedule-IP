@@ -18,7 +18,9 @@ allStudents = []
 allRequests = []
 
 if __name__=="__main__":
+    generateData(allStudents)
 
+def parseStudentInfo():
     """
     NOTE: This code currently does not work
     The course requests should not be stored in the Student object, but the data from the csv should instead be used to map Request objects to Students that already exist in the students table
@@ -55,6 +57,8 @@ if __name__=="__main__":
     
     session1.commit()
 
+
+def generateData(allStudents):
     courses = open('src/F17 Master Schedule Sept27_CS.csv', "rt")
     readCourses = csv.reader(courses)
     session2 = Session()

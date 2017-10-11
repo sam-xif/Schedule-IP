@@ -3,6 +3,11 @@ Scheduler module
 The module that does the actual scheduling
 """
 
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlite3 import dbapi2 as sqlite
+
 from pymodels import *
 import random
 
@@ -80,4 +85,15 @@ class BasicScheduler(Scheduler):
         return None
 
     def commit(self, connectString):
-        pass
+        # Creates and binds the engine
+        engine = create_engine(connectString, module=sqlite)
+        Session = sessionmaker(bind=engine)
+        session1 = Session()
+
+        # For each row, generates the database entry
+        for row in schedule:
+            scheduleEntry = Schedule(None, row[0].ID, row[0], row[1].ID, row[1])
+            session1.add(scheduleEntry.__export__())
+
+        # Commits the transaction
+        session1.commit()

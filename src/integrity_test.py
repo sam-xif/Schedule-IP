@@ -69,6 +69,17 @@ def integrity_test():
         print("Test passed")
     
     print("Done")
+
+def test_hashes():
+    # Generate 1000 objects
+    students = []
+    for i in range(1000):
+        students.append(models.Student(name=randomString(20), graduatingClass=randint(2015, 2020), studentId=randomString(7), sex=randomString(5), cluster=randomString(10)))
+        print(students[i].__hash__())
+
+    hashes = [x.__hash__() for x in students]
+    print("total number of unique hashes:", len(set(hashes)))
+
     
     
 if __name__ == "__main__":

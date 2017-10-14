@@ -12,6 +12,14 @@ class PyModelBase:
     
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
+
+    def __hash__(self):
+        # Standard hash function
+        hashes = [self.__dict__[x].__hash__() for x in self.__dict__ if x is not None]
+        hashSum = 0
+        for hash in hashes:
+            hashSum = 31 * hashSum + hash
+        return hashSum
     
 
 

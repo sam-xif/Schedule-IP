@@ -5,6 +5,7 @@ Alternatively, you can change the path in the CONNECT_STRING variable
 
 import models
 import pymodels
+import subprocess
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -22,12 +23,18 @@ def randomString(length):
 
 def integrity_test():
     print("Beginning integrity test...")
+
+    print("Rebuilding the database...")
+    rebuild_db = subprocess.run(['rebuild_db.bat'], stdout=subprocess.PIPE)
+    print(rebuild_db.stdout.decode('utf-8'))
     
+    print("Connecting to the database...")
     # Part 1: Generate objects and write them to the database
     engine = create_engine(CONNECT_STRING, module=sqlite, echo=DEBUG)
     Session = sessionmaker(bind=engine)
     session1 = Session()
     
+    print("Generating 1000 student objects...")
     # Generate 1000 objects
     students = []
     for i in range(1000):
@@ -37,6 +44,7 @@ def integrity_test():
     for student in students:
         session1.add(student)
     
+    print("Committing the transaction...")
     session1.commit()
 
     # studentObjects must be populated after the transaction is committed so that the primary key IDs are assigned

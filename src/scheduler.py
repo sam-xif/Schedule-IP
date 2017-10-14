@@ -22,8 +22,28 @@ class Scheduler:
         self.requests = requests
         self.classes = classes
     
-    def generateSchedule(self): pass
-    def commit(self): pass
+    def generateSchedule(self): 
+        """
+        Generates the schedule using some algorithm to be defined in the subclasses of Scheduler
+        """
+        pass
+    
+    def commit(self):
+        if not self.schedule:
+            raise AttributeError('Run generateSchedule() to generate the schedule before committing')
+
+        # Creates and binds the engine
+        engine = create_engine(connectString, module=sqlite)
+        Session = sessionmaker(bind=engine)
+        session1 = Session()
+
+        # For each row, generates the database entry
+        for row in self.schedule:
+            scheduleEntry = Schedule(None, row[0].ID, row[0], row[1].ID, row[1])
+            session1.add(scheduleEntry.__export__())
+
+        # Commits the transaction
+        session1.commit()
 
     # cost function that evalutes performance of the algorithm
     def cost(self):
@@ -49,7 +69,6 @@ class Scheduler:
 
 
 class BasicScheduler(Scheduler):
-
     def generateSchedule(self):
         schedule = []
 
@@ -83,17 +102,3 @@ class BasicScheduler(Scheduler):
 
         # If this is consistently returned, then there is no space left in any of the alternates
         return None
-
-    def commit(self, connectString):
-        # Creates and binds the engine
-        engine = create_engine(connectString, module=sqlite)
-        Session = sessionmaker(bind=engine)
-        session1 = Session()
-
-        # For each row, generates the database entry
-        for row in schedule:
-            scheduleEntry = Schedule(None, row[0].ID, row[0], row[1].ID, row[1])
-            session1.add(scheduleEntry.__export__())
-
-        # Commits the transaction
-        session1.commit()

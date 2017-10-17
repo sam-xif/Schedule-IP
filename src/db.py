@@ -69,6 +69,7 @@ def addClassesToDB():
     Session = sessionmaker(bind=engine)
     session1 = Session()
 
+    # Format Course,Period,Teacher,Section,Room,Days
 
     classObjects = []
     first = True
@@ -79,12 +80,17 @@ def addClassesToDB():
 
         if row[0] == '': continue
 
+        cap = 16
+
         courseCode = row[0].split(':')[0].strip()
         courseName = row[0].split(':')[1].strip()
+        period = row[1].strip()
+        teacher = row[2].strip()
+        section = int(row[3].strip())
+        room = row[4].strip()
+        days = row[5].strip()
         print("Add course", courseCode)
-
-        # TODO: Add more info here
-        classObjects.append(pymodels.Class(None, courseName, courseCode, 0, 0, '', '', 16, 16, 16))
+        classObjects.append(pymodels.Class(None, courseName, courseCode, period, days, section, room, teacher, cap, cap, cap))
 
     for c in classObjects:
         session1.add(c.__export__())

@@ -102,3 +102,12 @@ class BasicScheduler(Scheduler):
 
         # If this is consistently returned, then there is no space left in any of the alternates
         return None
+
+
+def generateSchedule():
+    """Main procedure for generating schedules"""
+    pass
+
+
+if __name__=="__main__":
+    generateSchedule()

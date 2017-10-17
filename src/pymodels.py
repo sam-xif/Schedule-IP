@@ -24,11 +24,12 @@ class PyModelBase:
 
 
 class Class(PyModelBase):
-    def __init__(self, ID, className, classCode, periodCode, section, room, instructor, slotsRemaining, targetCapacity, maxCapacity):
+    def __init__(self, ID, className, classCode, period, days, section, room, instructor, slotsRemaining, targetCapacity, maxCapacity):
         self.ID=ID
         self.className=className
         self.classCode=classCode
-        self.periodCode=periodCode
+        self.period=period
+        self.days=days
         self.section=section
         self.room=room
         self.instructor=instructor
@@ -41,13 +42,13 @@ class Class(PyModelBase):
         if type(data) is not models.Class or data is None:
             raise Exception("Invalid argument to __import__")
 
-        return Class(data.ID, data.className, data.classCode, data.periodCode, data.section, data.room, data.instructor, data.slotsRemaining, data.targetCapacity, data.maxCapacity)
+        return Class(data.ID, data.className, data.classCode, data.period, data.days, data.section, data.room, data.instructor, data.slotsRemaining, data.targetCapacity, data.maxCapacity)
         
     def __export__(self):
-        return models.Class(ID=self.ID, className=self.className, classCode=self.classCode, periodCode=self.periodCode, section=self.section, room=self.room, instructor=self.instructor, slotsRemaining=self.slotsRemaining, targetCapacity=self.targetCapacity, maxCapacity=self.maxCapacity)
+        return models.Class(ID=self.ID, className=self.className, classCode=self.classCode, period=self.period, days=self.days, section=self.section, room=self.room, instructor=self.instructor, slotsRemaining=self.slotsRemaining, targetCapacity=self.targetCapacity, maxCapacity=self.maxCapacity)
         
     def __repr__(self):
-        return "Class<ID={}, className={}, classCode={}, periodCode={}, section={}, room={}, instructor={}, slotsRemaining={}, targetCapacity={}, maxCapacity={}".format(ID, className, classCode, periodCode, section, room, instructor, slotsRemaining, targetCapacity, maxCapacity)
+        return "Class<ID={}, className={}, classCode={}, period={}, days={}, section={}, room={}, instructor={}, slotsRemaining={}, targetCapacity={}, maxCapacity={}".format(ID, className, classCode, period, days, section, room, instructor, slotsRemaining, targetCapacity, maxCapacity)
 
 
 class Student(PyModelBase):

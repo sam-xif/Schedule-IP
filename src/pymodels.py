@@ -96,6 +96,51 @@ class Schedule(PyModelBase):
         return "Schedule<ID={}, student_id={}, student={}, _class_id={}, _class={}".format(ID, student_id, student, _class_id, _class)
 
 
+class SimpleRequest(PyModelBase):
+    def __init__(self, ID, student_id, student, courseload, course1, c1alt1, c1alt2, c1alt3, course2, c2alt1, c2alt2, c2alt3, course3, c3alt1, c3alt2, c3alt3, course4, c4alt1, c4alt2, c4alt3, course5, c5alt1, c5alt2, c5alt3, course6, c6alt1, c6alt2, c6alt3):
+        self.ID=ID
+        self.student_id=student_id
+        self.student=student
+        self.courseload=courseload
+        self.course1=course1
+        self.c1alt1=c1alt1
+        self.c1alt2=c1alt2
+        self.c1alt3=c1alt3
+        self.course2=course2
+        self.c2alt1=c2alt1
+        self.c2alt2=c2alt2
+        self.c2alt3=c2alt3
+        self.course3=course3
+        self.c3alt1=c3alt1
+        self.c3alt2=c3alt2
+        self.c3alt3=c3alt3
+        self.course4=course4
+        self.c4alt1=c4alt1
+        self.c4alt2=c4alt2
+        self.c4alt3=c4alt3
+        self.course5=course5
+        self.c5alt1=c5alt1
+        self.c5alt2=c5alt2
+        self.c5alt3=c5alt3
+        self.course6=course6
+        self.c6alt1=c6alt1
+        self.c6alt2=c6alt2
+        self.c6alt3=c6alt3
+        
+    @staticmethod
+    def __import__(data):
+        if type(data) is not models.SimpleRequest or data is None:
+            raise Exception("Invalid argument to __import__")
+
+        return SimpleRequest(data.ID, data.student_id, data.student, data.courseload, data.course1, data.c1alt1, data.c1alt2, data.c1alt3, data.course2, data.c2alt1, data.c2alt2, data.c2alt3, data.course3, data.c3alt1, data.c3alt2, data.c3alt3, data.course4, data.c4alt1, data.c4alt2, data.c4alt3, data.course5, data.c5alt1, data.c5alt2, data.c5alt3, data.course6, data.c6alt1, data.c6alt2, data.c6alt3)
+        
+    def __export__(self):
+        return models.SimpleRequest(ID=self.ID, student_id=self.student_id, student=self.student, courseload=self.courseload, course1=self.course1, c1alt1=self.c1alt1, c1alt2=self.c1alt2, c1alt3=self.c1alt3, course2=self.course2, c2alt1=self.c2alt1, c2alt2=self.c2alt2, c2alt3=self.c2alt3, course3=self.course3, c3alt1=self.c3alt1, c3alt2=self.c3alt2, c3alt3=self.c3alt3, course4=self.course4, c4alt1=self.c4alt1, c4alt2=self.c4alt2, c4alt3=self.c4alt3, course5=self.course5, c5alt1=self.c5alt1, c5alt2=self.c5alt2, c5alt3=self.c5alt3, course6=self.course6, c6alt1=self.c6alt1, c6alt2=self.c6alt2, c6alt3=self.c6alt3)
+        
+    def __repr__(self):
+        return "SimpleRequest<ID={}, student_id={}, student={}, courseload={}, course1={}, c1alt1={}, c1alt2={}, c1alt3={}, course2={}, c2alt1={}, c2alt2={}, c2alt3={}, course3={}, c3alt1={}, c3alt2={}, c3alt3={}, course4={}, c4alt1={}, c4alt2={}, c4alt3={}, course5={}, c5alt1={}, c5alt2={}, c5alt3={}, course6={}, c6alt1={}, c6alt2={}, c6alt3={}".format(ID, student_id, student, courseload, course1, c1alt1, c1alt2, c1alt3, course2, c2alt1, c2alt2, c2alt3, course3, c3alt1, c3alt2, c3alt3, course4, c4alt1, c4alt2, c4alt3, course5, c5alt1, c5alt2, c5alt3, course6, c6alt1, c6alt2, c6alt3)
+
+
 class Request(PyModelBase):
     def __init__(self, ID, student_id, student, yearlong1, yearlong2, yearlong3, yearlong4, engElectiveTop, engElective1, engElective2, engElective3, engElective4, engElective5, termContained1, cont1alt1, cont1alt2, cont1alt3, cont1alt4, termContained2, cont2alt1, cont2alt2, cont2alt3, cont2alt4, termContained3, cont3alt1, cont3alt2, cont3alt3, cont3alt4, termContained4, cont4alt1, cont4alt2, cont4alt3, cont4alt4, termContained5, cont5alt1, cont5alt2, cont5alt3, cont5alt4, courseLoad, course6, topPriority):
         self.ID=ID

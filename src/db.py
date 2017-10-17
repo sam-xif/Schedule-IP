@@ -1,24 +1,26 @@
-import sys
+﻿import sys
 import csv
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlite3 import dbapi2 as sqlite
-from random import randint
+import random
 
-from models import *
+import pymodels
+
+# Import random student generator from the integrity test module
+from integrity_test import generateStudentObject
 
 DEBUG=True
 
 engine = create_engine('sqlite+pysqlite:///schedule.db', module=sqlite, echo=DEBUG)
 print(engine)
 
+MASTER_SCHED = 'src/F17-Master-Schedule-Sept27_CS.csv'
+
 allStudents = []
 
 allRequests = []
-
-if __name__=="__main__":
-    generateData(allStudents)
 
 def parseStudentInfo():
     """
@@ -57,11 +59,59 @@ def parseStudentInfo():
     
     session1.commit()
 
+def addClassesToDB():
+    """Add classes from master schedule csv to database"""
+    print("Opening master schedule file...")
+    courses = open(MASTER_SCHED, "rt")
+    
+    print("Preparing to add courses...")
+    readCourses = csv.reader(courses)
+    Session = sessionmaker(bind=engine)
+    session1 = Session()
+
+
+    classObjects = []
+    first = True
+    for row in readCourses:
+        if first: 
+            first = False
+            continue
+
+        if row[0] == '': continue
+
+        courseCode = row[0].split(':')[0].strip()
+        courseName = row[0].split(':')[1].strip()
+        print("Add course", courseCode)
+
+        # TODO: Add more info here
+        classObjects.append(pymodels.Class(None, courseName, courseCode, 0, 0, '', '', 16, 16, 16))
+
+    for c in classObjects:
+        session1.add(c.__export__())
+
+    print("Committing...")
+    session1.commit()
+    session1.close()
+    courses.close()
+
+def prret(obj, formatStr, *args):
+    """
+    Utility printing function.
+
+    TODO: Remove this once no longer needed
+    """
+    print(formatStr.format(obj, *args))
+    return obj
+
+def generateClassSet(classes, numAlternates):
+    """Helper function for generateData"""
+    return [prret(classes[x], 'cl: {}')[0] for x in random.sample(range(0, len(classes)), numAlternates if numAlternates <= len(classes) else len(classes))]
 
 def generateData(allStudents):
-    courses = open('src/F17 Master Schedule Sept27_CS.csv', "rt")
+    courses = open(MASTER_SCHED, "rt")
     readCourses = csv.reader(courses)
-    session2 = Session()
+    Session = sessionmaker(bind=engine)
+    session1 = Session()
     first = True
 
 
@@ -90,22 +140,22 @@ def generateData(allStudents):
     theater = [] #THD
 
     languages = []
-    languages.extend(arabic, chinese, classics, french, german, japanese, latin, russian, spanish)
+    languages.extend([arabic, chinese, classics, french, german, japanese, latin, russian, spanish])
 
     sciences = []
-    sciences.extend(biology, chemistry, physics, science)
+    sciences.extend([biology, chemistry, physics, science])
 
     sixth = []
-    sixth.extend(art, music, theater, phd, empathy)
+    sixth.extend([art, music, theater, phd, empathy])
 
     others = []
-    others.extend(history, relphil)
+    others.extend([history, relphil])
 
     for row in readCourses:
         if (first):
             first = False
         else:
-            course = str(row).split(',')[0][:3]
+            course = row[0].split(',')[0][:3]
             if (course == "ARA"):
                 arabic.append(row)
             elif (course == "ART"):
@@ -150,37 +200,52 @@ def generateData(allStudents):
                 spanish.append(row)
             elif (course == "THD"):
                 theater.append(row)
+            # CSC is not included 
             else:
                 print("The course code: " + course + " could not be evaluated")
 
     for r in allStudents: #THIS CREATES A RANDOM SET OF CLASSES
+
+
         classReq = [] # array of courses to be allocated to a student
         # rquirements vary depending on class of student
         # 30% chance that they take 6 classes and 70 that they take 5
 
         # For some reason, half of the courses in the course list got cut out of the csv
 
-        six = (randint(1,10) > 7)
-        print("Do they take 6 classes? " + six)
-        class1 = math[randint(1,len(math))].split(',')[0] #this is their math class
-        classReq.append(class1)
+        six = (random.randint(0,10) > 7)
+        # print("Do they take 6 classes? ", six)
 
-        language = randint(1,len(languages))
-        class2 = languages[language][randint(1,len(languages[language]))].split(',')[0] #This is their language class
-        classReq.append(class2)
+        # math
+        classReq.append(generateClassSet(math, 3))
 
-        class3 = english[randint(1,len(english))].split(',')[0] #this is their english class
-        classReq.append(class3)
+        # language
+        language = random.randint(0, len(languages) - 1)
+        classReq.append(generateClassSet(languages[language], 3))
 
-        sciClass = randint(1,len(sciences))
-        class4 = sciences[sciClass][randint(1,len(sciences[sciClass]))].split(',')[0] #this is their science class
-        classReq.append(class4)
+        #english
+        classReq.append(generateClassSet(english, 3))
+        
+        # science
+        sciClass = random.randint(0, len(sciences) - 1)
+        classReq.append(generateClassSet(sciences[sciClass], 3))
 
-        otherClass = randint(1,len(others))
-        class5 = others[otherClass][randint(1,len(others[otherClass]))].split(',')[0] #other class (history or relphil)
-        classReq.append(class5)
+        # other
+        otherClass = random.randint(0, len(others) - 1)
+        classReq.append(generateClassSet(others[otherClass], 3))
 
         if (six):
-            sixthClass = randint(1,len(sixth))
-            class6 = sixth[sixthClass][randint(1,len(sixth[sixthClass]))].split(',')[0] #assuming 6th class is a theater/art
-            classReq.append(class6)
+            sixthClass = random.randint(0, len(sixth) - 1)
+            classReq.append(generateClassSet(sixth[sixthClass], 3))
+
+        print(classReq)
+
+    session1.commit()
+    courses.close()
+
+if __name__=="__main__":
+
+    if sys.argv[1] == '--add-courses':
+        addClassesToDB()
+    else:
+        generateData([1])

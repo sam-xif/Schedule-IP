@@ -56,7 +56,9 @@ class Schedule(Base):
     _class = relationship(Class, primaryjoin=_class_id == Class.ID)
 
 class SimpleRequest(Base):
-    # A simpler requests class added for convenience
+    """
+    A simpler requests class added for convenience
+    """
 
     __tablename__ = "simplereqs"
 

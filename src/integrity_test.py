@@ -1,4 +1,4 @@
-"""
+﻿"""
 This command must be run from the directory where the database is, or it won't work.
 Alternatively, you can change the path in the CONNECT_STRING variable
 """
@@ -21,6 +21,9 @@ def randomString(length):
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     return ''.join([alphabet[randrange(len(alphabet))] for x in range(length)])
 
+def generateStudentObject():
+    return models.Student(name=randomString(20), graduatingClass=randint(2015, 2020), studentId=randomString(7), sex=randomString(5), cluster=randomString(10))
+
 def integrity_test():
     print("Beginning integrity test...")
 
@@ -38,7 +41,7 @@ def integrity_test():
     # Generate 1000 objects
     students = []
     for i in range(1000):
-        students.append(models.Student(name=randomString(20), graduatingClass=randint(2015, 2020), studentId=randomString(7), sex=randomString(5), cluster=randomString(10)))
+        students.append(generateStudentObject())
        
     # Add student objects to database
     for student in students:

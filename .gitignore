@@ -1,7 +1,8 @@
 __pycache__/
+sln/
+*.pyproj
+*.sln
 *.py[cod]
-# migrate_repo/__pychache__/
-# src/__pycache__/
 *.db
 *.bu
 *.csv

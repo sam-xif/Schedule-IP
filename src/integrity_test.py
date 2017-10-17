@@ -3,8 +3,9 @@ This command must be run from the directory where the database is, or it won't w
 Alternatively, you can change the path in the CONNECT_STRING variable
 """
 
-import models
-import pymodels
+from src import models
+from src import pymodels
+
 import subprocess
 
 from sqlalchemy import create_engine

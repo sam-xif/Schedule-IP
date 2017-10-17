@@ -1,4 +1,4 @@
-"""
+﻿"""
 models.py
 
 This file should contain a reflection of the database schema.
@@ -68,35 +68,35 @@ class SimpleRequest(Base):
     courseload = Column(Integer)
 
     # Courses are integers because they are represented as IDs from the classes table
-    course1 = Column(Integer, ForeignKey("classes.ID"))
-    c1alt1 = Column(Integer, ForeignKey("classes.ID"))
-    c1alt2 = Column(Integer, ForeignKey("classes.ID"))
-    c1alt3 = Column(Integer, ForeignKey("classes.ID"))
+    course1 = Column(String)
+    c1alt1 = Column(String)
+    c1alt2 = Column(String)
+    c1alt3 = Column(String)
 
-    course2 = Column(Integer, ForeignKey("classes.ID"))
-    c2alt1 = Column(Integer, ForeignKey("classes.ID"))
-    c2alt2 = Column(Integer, ForeignKey("classes.ID"))
-    c2alt3 = Column(Integer, ForeignKey("classes.ID"))
+    course2 = Column(String)
+    c2alt1 = Column(String)
+    c2alt2 = Column(String)
+    c2alt3 = Column(String)
 
-    course3 = Column(Integer, ForeignKey("classes.ID"))
-    c3alt1 = Column(Integer, ForeignKey("classes.ID"))
-    c3alt2 = Column(Integer, ForeignKey("classes.ID"))
-    c3alt3 = Column(Integer, ForeignKey("classes.ID"))
+    course3 = Column(String)
+    c3alt1 = Column(String)
+    c3alt2 = Column(String)
+    c3alt3 = Column(String)
 
-    course4 = Column(Integer, ForeignKey("classes.ID"))
-    c4alt1 = Column(Integer, ForeignKey("classes.ID"))
-    c4alt2 = Column(Integer, ForeignKey("classes.ID"))
-    c4alt3 = Column(Integer, ForeignKey("classes.ID"))
+    course4 = Column(String)
+    c4alt1 = Column(String)
+    c4alt2 = Column(String)
+    c4alt3 = Column(String)
 
-    course5 = Column(Integer, ForeignKey("classes.ID"))
-    c5alt1 = Column(Integer, ForeignKey("classes.ID"))
-    c5alt2 = Column(Integer, ForeignKey("classes.ID"))
-    c5alt3 = Column(Integer, ForeignKey("classes.ID"))
+    course5 = Column(String)
+    c5alt1 = Column(String)
+    c5alt2 = Column(String)
+    c5alt3 = Column(String)
 
-    course6 = Column(Integer, ForeignKey("classes.ID"))
-    c6alt1 = Column(Integer, ForeignKey("classes.ID"))
-    c6alt2 = Column(Integer, ForeignKey("classes.ID"))
-    c6alt3 = Column(Integer, ForeignKey("classes.ID"))
+    course6 = Column(String)
+    c6alt1 = Column(String)
+    c6alt2 = Column(String)
+    c6alt3 = Column(String)
 
 class Request(Base):
     __tablename__ = "requests"

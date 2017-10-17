@@ -1,4 +1,4 @@
-"""
+﻿"""
 Scheduler module
 The module that does the actual scheduling
 """
@@ -8,8 +8,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlite3 import dbapi2 as sqlite
 
-import pymodels
-import models
+from src import pymodels
+from src import models
+
+from src.integrity_test import generateStudentObject
+
 import random
 
 CONNECT_STRING='sqlite+pysqlite:///schedule.db'
@@ -19,12 +22,14 @@ class Scheduler:
     Base scheduler interface
     """
 
-    def __init__(self, students, requests, classes):
+    def __init__(self, students, requests, classes, session):
         # These are data that are already pre-made
         # All of these are assumed to be from the pymodels types with initialized primary keys, except requests
+        # Session is the database session that these objects are bound to
         self.students = students
         self.requests = requests
         self.classes = classes
+        self.session = session
     
     def generateSchedule(self): 
         """
@@ -46,6 +51,7 @@ class Scheduler:
 
         # Commits the transaction
         session1.commit()
+
 
     # cost function that evalutes performance of the algorithm
     def cost(self):
@@ -108,23 +114,33 @@ class BasicScheduler(Scheduler):
 
 def generateSchedule():
     """Main procedure for generating schedules"""
+    # Add students
+
     engine = create_engine(CONNECT_STRING, module=sqlite, echo=DEBUG)
     Session = sessionmaker(bind=engine)
     session1 = Session()
+
+    for i in range(1000):
+        session1.add(generateStudentObject())
+
+    session1.commit()
+    session1.close()
+
+    session2 = Session()
 
     # Load class, student, and request data from database
     students = [pymodels.Student.__import__(x) for x in session1.query(models.Student).all()]
     requests = [pymodels.SimpleRequest.__import__(x) for x in session1.query(models.SimpleRequest).all()]
     classes = [pymodels.Class.__import__(x) for x in session1.query(models.Class).all()]
 
-    scheduler = BasicScheduler(students, requests, classes)
+    scheduler = BasicScheduler(students, requests, classes, session2)
 
     # Perform scheduling
     scheduler.generateSchedule()
 
     # Commit
-    session1.commit()
-    session1.close()
+    session2.commit()
+    session2.close()
 
 
 if __name__=="__main__":

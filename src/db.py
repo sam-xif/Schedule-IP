@@ -88,7 +88,9 @@ def addClassesToDB():
         section = int(row[3].strip())
         room = row[4].strip()
         days = row[5].strip()
+
         print("Add course", courseCode)
+        
         classObjects.append(pymodels.Class(None, courseName, courseCode, period, days, section, room, teacher, cap, cap, cap))
 
     for c in classObjects:
@@ -209,6 +211,7 @@ def generateRequests(allStudents):
             else:
                 print("The course code: " + course + " could not be evaluated")
 
+    requestsObjects = []
     for r in allStudents: #THIS CREATES A RANDOM SET OF CLASSES
 
 
@@ -222,26 +225,31 @@ def generateRequests(allStudents):
         # print("Do they take 6 classes? ", six)
 
         # math
-        classReq.append(generateClassSet(math, 3))
+        classReq.append(generateClassSet(math, 4))
 
         # language
         language = random.randint(0, len(languages) - 1)
-        classReq.append(generateClassSet(languages[language], 3))
+        classReq.append(generateClassSet(languages[language], 4))
 
         #english
-        classReq.append(generateClassSet(english, 3))
+        classReq.append(generateClassSet(english, 4))
         
         # science
         sciClass = random.randint(0, len(sciences) - 1)
-        classReq.append(generateClassSet(sciences[sciClass], 3))
+        classReq.append(generateClassSet(sciences[sciClass], 4))
 
         # other
         otherClass = random.randint(0, len(others) - 1)
-        classReq.append(generateClassSet(others[otherClass], 3))
+        classReq.append(generateClassSet(others[otherClass], 4))
 
         if (six):
             sixthClass = random.randint(0, len(sixth) - 1)
-            classReq.append(generateClassSet(sixth[sixthClass], 3))
+            classReq.append(generateClassSet(sixth[sixthClass], 4))
+        else:
+            classReq.append(['','','',''])
+
+
+        requestsObjects.append(pymodels.SimpleRequest(None, r.ID, r, 6 if six else 5, *classReq))
 
         print(classReq)
 

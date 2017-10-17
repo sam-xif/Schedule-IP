@@ -8,8 +8,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlite3 import dbapi2 as sqlite
 
-from pymodels import *
+import pymodels
+import models
 import random
+
+CONNECT_STRING='sqlite+pysqlite:///schedule.db'
 
 class Scheduler:
     """
@@ -18,6 +21,7 @@ class Scheduler:
 
     def __init__(self, students, requests, classes):
         # These are data that are already pre-made
+        # All of these are assumed to be from the pymodels types with initialized primary keys, except requests
         self.students = students
         self.requests = requests
         self.classes = classes
@@ -28,19 +32,17 @@ class Scheduler:
         """
         pass
     
-    def commit(self):
+    def commit(self, sessionMaker):
         if not self.schedule:
             raise AttributeError('Run generateSchedule() to generate the schedule before committing')
 
         # Creates and binds the engine
-        engine = create_engine(connectString, module=sqlite)
-        Session = sessionmaker(bind=engine)
-        session1 = Session()
+        session1 = sessionMaker()
 
         # For each row, generates the database entry
         for row in self.schedule:
-            scheduleEntry = Schedule(None, row[0].ID, row[0], row[1].ID, row[1])
-            session1.add(scheduleEntry.__export__())
+            scheduleEntry = pymodels.Schedule(None, row[0].ID, row[0], row[1].ID, row[1])
+            session1.add(scheduleEntry.__export_new__())
 
         # Commits the transaction
         session1.commit()
@@ -106,7 +108,23 @@ class BasicScheduler(Scheduler):
 
 def generateSchedule():
     """Main procedure for generating schedules"""
-    pass
+    engine = create_engine(CONNECT_STRING, module=sqlite, echo=DEBUG)
+    Session = sessionmaker(bind=engine)
+    session1 = Session()
+
+    # Load class, student, and request data from database
+    students = [pymodels.Student.__import__(x) for x in session1.query(models.Student).all()]
+    requests = [pymodels.SimpleRequest.__import__(x) for x in session1.query(models.SimpleRequest).all()]
+    classes = [pymodels.Class.__import__(x) for x in session1.query(models.Class).all()]
+
+    scheduler = BasicScheduler(students, requests, classes)
+
+    # Perform scheduling
+    scheduler.generateSchedule()
+
+    # Commit
+    session1.commit()
+    session1.close()
 
 
 if __name__=="__main__":

@@ -27,6 +27,9 @@ class PyModelBase:
     def __import__(data):
         raise NotImplementedError
         
+    def __export_new__(self):
+        raise NotImplementedError
+
     def __export__(self):
         raise NotImplementedError
     
@@ -53,18 +56,23 @@ def unescape_expansion(exp):
 def generateClass(variables):
     template="""
 class ${NAME:&}(PyModelBase):
-    def __init__(self, ${FIELDS:&:, }):
+    def __init__(self, ${FIELDS:&:, }, wrapped_object=None):
         ${FIELDS:self.&=&:\\n        }
+        self.wrapped_object = wrapped_object
         
     @staticmethod
     def __import__(data):
         if type(data) is not models.${NAME:&} or data is None:
             raise Exception("Invalid argument to __import__")
 
-        return ${NAME:&}(${FIELDS:data.&:, })
+        return ${NAME:&}(${FIELDS:data.&:, }, wrapped_object=data)
         
-    def __export__(self):
+    def __export_new__(self):
         return models.${NAME:&}(${FIELDS:&=self.&:, })
+
+    def __export__(self):
+        ${FIELDS:self.wrapped_object.&=self.&:\\n        }
+        return self.wrapped_object
         
     def __repr__(self):
         return "${NAME:&}<${FIELDS:&={\\}:, }".format(${FIELDS:&:, })

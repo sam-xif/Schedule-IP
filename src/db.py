@@ -14,7 +14,6 @@ from integrity_test import generateStudentObject
 DEBUG=True
 
 engine = create_engine('sqlite+pysqlite:///schedule.db', module=sqlite, echo=DEBUG)
-print(engine)
 
 MASTER_SCHED = 'src/F17-Master-Schedule-Sept27_CS.csv'
 
@@ -93,7 +92,7 @@ def addClassesToDB():
         classObjects.append(pymodels.Class(None, courseName, courseCode, period, days, section, room, teacher, cap, cap, cap))
 
     for c in classObjects:
-        session1.add(c.__export__())
+        session1.add(c.__export_new__())
 
     print("Committing...")
     session1.commit()
@@ -113,7 +112,7 @@ def generateClassSet(classes, numAlternates):
     """Helper function for generateData"""
     return [prret(classes[x], 'cl: {}')[0] for x in random.sample(range(0, len(classes)), numAlternates if numAlternates <= len(classes) else len(classes))]
 
-def generateData(allStudents):
+def generateRequests(allStudents):
     courses = open(MASTER_SCHED, "rt")
     readCourses = csv.reader(courses)
     Session = sessionmaker(bind=engine)
@@ -254,4 +253,4 @@ if __name__=="__main__":
     if sys.argv[1] == '--add-courses':
         addClassesToDB()
     else:
-        generateData([1])
+        generateRequests([1])

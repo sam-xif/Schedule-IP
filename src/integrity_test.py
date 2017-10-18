@@ -3,6 +3,7 @@ This command must be run from the directory where the database is, or it won't w
 Alternatively, you can change the path in the CONNECT_STRING variable
 """
 
+import os
 import sys
 if __name__=='__main__':
     sys.path.append(os.path.realpath('../')) # Assuming the script is run from within the src directory

@@ -4,6 +4,12 @@ The module that does the actual scheduling
 """
 
 
+import sys
+import os
+if __name__=='__main__':
+    sys.path.append(os.path.realpath('../')) # Assuming the script is run from within the src directory
+
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlite3 import dbapi2 as sqlite
@@ -15,7 +21,8 @@ from src.integrity_test import generateStudentObject
 
 import random
 
-CONNECT_STRING='sqlite+pysqlite:///schedule.db'
+CONNECT_STRING='sqlite+pysqlite:///../schedule.db'
+DEBUG=True
 
 class Scheduler:
     """
@@ -81,16 +88,16 @@ class BasicScheduler(Scheduler):
         schedule = []
 
         # Shuffle the order of request objects, and process them sequentially
-        random.shuffle(requests)
-        for req in requests:
+        random.shuffle(self.requests)
+        for req in self.requests:
             # Get associated student object
             student = req.student
 
-            schedule.append(self.assign(student, [req.termContained1, req.cont1alt1, req.cont1alt2, req.cont1alt3, req.cont1alt4]))
-            schedule.append(self.assign(student, [req.termContained2, req.cont2alt1, req.cont2alt2, req.cont2alt3, req.cont2alt4]))
-            schedule.append(self.assign(student, [req.termContained3, req.cont3alt1, req.cont3alt2, req.cont3alt3, req.cont3alt4]))
-            schedule.append(self.assign(student, [req.termContained4, req.cont4alt1, req.cont4alt2, req.cont4alt3, req.cont4alt4]))
-            schedule.append(self.assign(student, [req.termContained5, req.cont5alt1, req.cont5alt2, req.cont5alt3, req.cont5alt4]))
+            schedule.append(self.assign(student, [req.course1, req.c1alt1, req.c1alt2, req.c1alt3]))
+            schedule.append(self.assign(student, [req.course2, req.c2alt1, req.c2alt2, req.c2alt3]))
+            schedule.append(self.assign(student, [req.course3, req.c3alt1, req.c3alt2, req.c3alt3]))
+            schedule.append(self.assign(student, [req.course4, req.c4alt1, req.c4alt2, req.c4alt3]))
+            schedule.append(self.assign(student, [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]))
 
         self.schedule = schedule
         return schedule
@@ -100,7 +107,7 @@ class BasicScheduler(Scheduler):
 
         for alt, course in enumerate(request):
             # Get all sections of a particular course
-            courses = [x for x in classes if x.classCode == course]
+            courses = [x for x in self.classes if x.classCode == course]
             random.shuffle(courses)
 
             for course in courses:
@@ -132,9 +139,13 @@ def generateSchedule():
     # Perform scheduling
     scheduler.generateSchedule()
 
+    # TODO: Update objects modified in generateSchedule(), then commit
+
     # Commit
     session1.commit()
     session1.close()
+
+    scheduler.commit(Session)
 
 
 if __name__=="__main__":

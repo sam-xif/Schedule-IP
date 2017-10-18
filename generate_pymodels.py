@@ -75,7 +75,7 @@ class ${NAME:&}(PyModelBase):
         return self.wrapped_object
         
     def __repr__(self):
-        return "${NAME:&}<${FIELDS:&={\\}:, }".format(${FIELDS:&:, })
+        return "${NAME:&}<${FIELDS:&={\\}:, }".format(${FIELDS:self.&:, })
 
 """
     

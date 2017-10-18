@@ -270,7 +270,7 @@ if __name__=="__main__":
             addClassesToDB()
         elif sys.argv[1] == 'add-students':
             session1 = Session()
-            numStudents = 1000
+            numStudents = int(sys.argv[2])
 
             for i in range(numStudents):
                 session1.add(generateStudentObject())

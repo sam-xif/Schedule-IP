@@ -16,6 +16,7 @@ from sqlite3 import dbapi2 as sqlite
 
 from src import pymodels
 from src import models
+from src.classcode import ClassCode
 
 from src.integrity_test import generateStudentObject
 
@@ -44,20 +45,22 @@ class Scheduler:
         """
         pass
     
-    def commit(self, sessionMaker):
+    def commit(self, close=False):
         if not self.schedule:
             raise AttributeError('Run generateSchedule() to generate the schedule before committing')
 
         # Creates and binds the engine
-        session1 = sessionMaker()
 
         # For each row, generates the database entry
         for row in self.schedule:
-            scheduleEntry = pymodels.Schedule(None, row[0].ID, row[0], row[1].ID, row[1])
-            session1.add(scheduleEntry.__export_new__())
+            # row[0] is models.Student, row[1] is pymodels.Class
+            if row is not None:
+                scheduleEntry = pymodels.Schedule(None, row[0].ID, row[0], row[1].ID, row[1].__export__())
+                self.session.add(scheduleEntry.__export_new__())
 
-        # Commits the transaction
-        session1.commit()
+        if close:
+            self.session.commit()
+            self.session.close()
 
 
     # cost function that evalutes performance of the algorithm
@@ -85,6 +88,9 @@ class Scheduler:
 
 class BasicScheduler(Scheduler):
     def generateSchedule(self):
+        self.fails = 0
+        self.totalassignments = 0
+
         schedule = []
 
         # Shuffle the order of request objects, and process them sequentially
@@ -103,19 +109,30 @@ class BasicScheduler(Scheduler):
         return schedule
 
     def assign(self, student, request):
-        # returns a (student, section, preference) triple, or None if no class could be assigned
+        self.totalassignments += 1
 
+        # returns a (student, section, preference) triple, or None if no class could be assigned
+        print('assigning', student.name, end='')
         for alt, course in enumerate(request):
+            if course == '': continue
+
             # Get all sections of a particular course
-            courses = [x for x in self.classes if x.classCode == course]
+            courses = [x for x in self.classes if 
+                       ClassCode.getClassCodeFromTitle(x.classCode) == 
+                       ClassCode.getClassCodeFromTitle(course)]
             random.shuffle(courses)
 
             for course in courses:
                 if course.slotsRemaining > 0:
                     course.slotsRemaining -= 1
+                    print('\tcourse assigned:', course.classCode)
                     return (student, course, alt)
+            print('\tcourse full, proceeding to alternates')
+
+        self.fails += 1
 
         # If this is consistently returned, then there is no space left in any of the alternates
+        print('\tWARNING: could not assign student')
         return None
 
 
@@ -138,14 +155,14 @@ def generateSchedule():
 
     # Perform scheduling
     scheduler.generateSchedule()
-
+    scheduler.commit()
     # TODO: Update objects modified in generateSchedule(), then commit
 
     # Commit
     session1.commit()
     session1.close()
 
-    scheduler.commit(Session)
+    print('fail_rate:', '{}%'.format((scheduler.fails / scheduler.totalassignments) * 100), '({} / {})'.format(scheduler.fails, scheduler.totalassignments))
 
 
 if __name__=="__main__":

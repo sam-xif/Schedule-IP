@@ -85,7 +85,7 @@ def addClassesToDB():
 
         if row[0] == '': continue
 
-        cap = 16
+        cap = 18
 
         courseCode = row[0].split(':')[0].strip()
         courseName = row[0].split(':')[1].strip()

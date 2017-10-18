@@ -127,6 +127,7 @@ class BasicScheduler(Scheduler):
                     course.slotsRemaining -= 1
                     print('\tcourse assigned:', course.classCode)
                     return (student, course, alt)
+                print('\tsection full, {} students left, going to next one'.format(course.slotsRemaining))
             print('\tcourse full, proceeding to alternates')
 
         self.fails += 1

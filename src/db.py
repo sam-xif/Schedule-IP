@@ -1,4 +1,5 @@
 ﻿import sys
+import os
 import csv
 
 from sqlalchemy import create_engine
@@ -6,16 +7,21 @@ from sqlalchemy.orm import sessionmaker
 from sqlite3 import dbapi2 as sqlite
 import random
 
-import pymodels
+if __name__=='__main__':
+    sys.path.append(os.path.realpath('../')) # Assuming the script is run from within the src directory
+
+from src import pymodels
+from src import models
 
 # Import random student generator from the integrity test module
 from integrity_test import generateStudentObject
 
 DEBUG=True
 
-engine = create_engine('sqlite+pysqlite:///schedule.db', module=sqlite, echo=DEBUG)
+engine = create_engine('sqlite+pysqlite:///../schedule.db', module=sqlite, echo=DEBUG)
+Session = sessionmaker(bind=engine)
 
-MASTER_SCHED = 'src/F17-Master-Schedule-Sept27_CS.csv'
+MASTER_SCHED = 'F17-Master-Schedule-Sept27_CS.csv'
 
 allStudents = []
 
@@ -112,16 +118,15 @@ def prret(obj, formatStr, *args):
 
 def generateClassSet(classes, numAlternates):
     """Helper function for generateData"""
-    return [prret(classes[x], 'cl: {}')[0] for x in random.sample(range(0, len(classes)), numAlternates if numAlternates <= len(classes) else len(classes))]
+    list = [prret(classes[x], 'cl: {}')[0] for x in random.sample(range(0, len(classes)), numAlternates if numAlternates <= len(classes) else len(classes))]
+    while len(list) < numAlternates: list.append('')
+    return list
 
 def generateRequests(allStudents):
     courses = open(MASTER_SCHED, "rt")
     readCourses = csv.reader(courses)
-    Session = sessionmaker(bind=engine)
     session1 = Session()
     first = True
-
-
 
     arabic = [] #ARA
     art = [] #ART
@@ -225,40 +230,57 @@ def generateRequests(allStudents):
         # print("Do they take 6 classes? ", six)
 
         # math
-        classReq.append(generateClassSet(math, 4))
+        classReq.extend(generateClassSet(math, 4))
 
         # language
         language = random.randint(0, len(languages) - 1)
-        classReq.append(generateClassSet(languages[language], 4))
+        classReq.extend(generateClassSet(languages[language], 4))
 
         #english
-        classReq.append(generateClassSet(english, 4))
+        classReq.extend(generateClassSet(english, 4))
         
         # science
         sciClass = random.randint(0, len(sciences) - 1)
-        classReq.append(generateClassSet(sciences[sciClass], 4))
+        classReq.extend(generateClassSet(sciences[sciClass], 4))
 
         # other
         otherClass = random.randint(0, len(others) - 1)
-        classReq.append(generateClassSet(others[otherClass], 4))
+        classReq.extend(generateClassSet(others[otherClass], 4))
 
         if (six):
             sixthClass = random.randint(0, len(sixth) - 1)
-            classReq.append(generateClassSet(sixth[sixthClass], 4))
+            classReq.extend(generateClassSet(sixth[sixthClass], 4))
         else:
-            classReq.append(['','','',''])
+            classReq.extend(['','','',''])
 
+        print("CRLEN:", len(classReq))
 
         requestsObjects.append(pymodels.SimpleRequest(None, r.ID, r, 6 if six else 5, *classReq))
 
         print(classReq)
 
+    for req in requestsObjects: session1.add(req.__export_new__())
+
     session1.commit()
     courses.close()
 
 if __name__=="__main__":
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'add-courses':
+            addClassesToDB()
+        elif sys.argv[1] == 'add-students':
+            session1 = Session()
+            numStudents = 1000
 
-    if sys.argv[1] == '--add-courses':
-        addClassesToDB()
+            for i in range(numStudents):
+                session1.add(generateStudentObject())
+
+            print("Added", numStudents, "students")
+            session1.commit()
+            session1.close()
     else:
-        generateRequests([1])
+        session1 = Session()
+        students = session1.query(models.Student).all()
+        session1.close()
+
+        generateRequests(students)

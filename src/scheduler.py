@@ -120,27 +120,21 @@ def generateSchedule():
     Session = sessionmaker(bind=engine)
     session1 = Session()
 
-    for i in range(1000):
-        session1.add(generateStudentObject())
-
-    session1.commit()
-    session1.close()
-
-    session2 = Session()
+    students = session1.query(models.Student).all()
 
     # Load class, student, and request data from database
     students = [pymodels.Student.__import__(x) for x in session1.query(models.Student).all()]
     requests = [pymodels.SimpleRequest.__import__(x) for x in session1.query(models.SimpleRequest).all()]
     classes = [pymodels.Class.__import__(x) for x in session1.query(models.Class).all()]
 
-    scheduler = BasicScheduler(students, requests, classes, session2)
+    scheduler = BasicScheduler(students, requests, classes, session1)
 
     # Perform scheduling
     scheduler.generateSchedule()
 
     # Commit
-    session2.commit()
-    session2.close()
+    session1.commit()
+    session1.close()
 
 
 if __name__=="__main__":

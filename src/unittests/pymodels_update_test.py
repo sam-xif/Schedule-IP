@@ -2,7 +2,8 @@
 import sys
 import os
 
-sys.path.append(os.path.realpath('../'))
+if __name__=="__main__":
+    sys.path.append(os.path.realpath('../'))
 
 from src import models
 from src import pymodels

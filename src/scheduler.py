@@ -141,6 +141,8 @@ def generateSchedule():
     """Main procedure for generating schedules"""
     # Add students
 
+    cap = 18
+
     engine = create_engine(CONNECT_STRING, module=sqlite, echo=DEBUG)
     Session = sessionmaker(bind=engine)
     session1 = Session()
@@ -151,6 +153,10 @@ def generateSchedule():
     students = [pymodels.Student.__import__(x) for x in session1.query(models.Student).all()]
     requests = [pymodels.SimpleRequest.__import__(x) for x in session1.query(models.SimpleRequest).all()]
     classes = [pymodels.Class.__import__(x) for x in session1.query(models.Class).all()]
+
+    for c in classes:
+        c.slotsRemaining = cap
+
 
     scheduler = BasicScheduler(students, requests, classes, session1)
 

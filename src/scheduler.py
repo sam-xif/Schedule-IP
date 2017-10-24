@@ -102,7 +102,7 @@ class Scheduler:
             if (course.ID not in classIDs):
                 classIDs.append(course.ID)
                 totalCourses += 1
-                # genTotal += genderCostFunc(/(16-course.slotsRemaining)) IM GONNA GO FIX THE WAY SCHEDULE IS ORGANIZED 
+                # genTotal += genderCostFunc(/(16-course.slotsRemaining)) IM GONNA GO FIX THE WAY SCHEDULE IS ORGANIZED
 
             #difficulty is getting the gender ratio
 
@@ -127,37 +127,39 @@ class BasicScheduler(Scheduler):
             # Get associated student object
             student = req.student
 
-            schedule.append(self.assign(student, [req.course1, req.c1alt1, req.c1alt2, req.c1alt3]))
-            schedule.append(self.assign(student, [req.course2, req.c2alt1, req.c2alt2, req.c2alt3]))
-            schedule.append(self.assign(student, [req.course3, req.c3alt1, req.c3alt2, req.c3alt3]))
-            schedule.append(self.assign(student, [req.course4, req.c4alt1, req.c4alt2, req.c4alt3]))
-            schedule.append(self.assign(student, [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]))
+            schedule.append(self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]]))
 
         self.schedule = schedule
         return schedule
 
-    def assign(self, student, request):
-        self.totalassignments += 1
+    def assign(self, student, requests):
+        self.totalassignments += 5
 
         # returns a (student, section, preference) triple, or None if no class could be assigned
+
+        allClasses = [student,]
+
         print('assigning', student.name, end='')
-        for alt, course in enumerate(request):
-            if course == '': continue
+        for request in requests:
+            for alt, course in enumerate(request):
+                if course == '': continue
 
-            # Get all sections of a particular course
-            courses = [x for x in self.classes if
-                       ClassCode.getClassCodeFromTitle(x.classCode) ==
-                       ClassCode.getClassCodeFromTitle(course)]
-            random.shuffle(courses)
+                # Get all sections of a particular course
+                courses = [x for x in self.classes if
+                           ClassCode.getClassCodeFromTitle(x.classCode) ==
+                           ClassCode.getClassCodeFromTitle(course)]
+                random.shuffle(courses)
 
-            for course in courses:
-                if course.slotsRemaining > 0:
-                    course.slotsRemaining -= 1
-                    print('\tcourse assigned:', course.classCode)
-                    return (student, course, alt)
-                print('\tsection full, {} students left, going to next one'.format(course.slotsRemaining))
-            print('\tcourse full, proceeding to alternates')
+                for course in courses:
+                    if course.slotsRemaining > 0:
+                        course.slotsRemaining -= 1
+                        print('\tcourse assigned:', course.classCode)
+                        allClasses.append([course, alt])
+                        break
+                    print('\tsection full, {} students left, going to next one'.format(course.slotsRemaining))
+                print('\tcourse full, proceeding to alternates')
 
+        return allClasses
         self.fails += 1
 
         # If this is consistently returned, then there is no space left in any of the alternates

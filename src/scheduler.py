@@ -102,7 +102,7 @@ class Scheduler:
             if (course.ID not in classIDs):
                 classIDs.append(course.ID)
                 totalCourses += 1
-                # genTotal += genderCostFunc(/(16-course.slotsRemaining)) IM GONNA GO FIX THE WAY SCHEDULE IS ORGANIZED
+                # genTotal += genderCostFunc(/(16-course.slotsRemaining)) IM GONNA GO FIX THE WAY SCHEDULE IS ORGANIZED 
 
             #difficulty is getting the gender ratio
 

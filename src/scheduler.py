@@ -38,13 +38,13 @@ class Scheduler:
         self.requests = requests
         self.classes = classes
         self.session = session
-    
-    def generateSchedule(self): 
+
+    def generateSchedule(self):
         """
         Generates the schedule using some algorithm to be defined in the subclasses of Scheduler
         """
         pass
-    
+
     def commit(self, close=False):
         if not self.schedule:
             raise AttributeError('Run generateSchedule() to generate the schedule before committing')
@@ -65,7 +65,7 @@ class Scheduler:
 
     # cost function that evalutes performance of the algorithm
     def cost(self):
-        # Hyperparameters
+        # Hyperparameters - not prioritized
         alpha = 1
         beta = 1
         gamma = 1
@@ -77,13 +77,41 @@ class Scheduler:
         gradReqCost = 0
 
         # the input is the ratio of one gender (i.e. boys) to the total number of students
-        genderCostFunc = lambda x : 1 + 4(x**2 - x)
+        genderCostFunc = lambda x :  (-4)*(x**2 - x) #optimized at 1/2 at which point y = 1
 
-        for student, course, pref in self.schedule:
-            prefCost += pref**2
-            # ...
+        prefCost = lambda x : (-1/16)*(x**2) + 1
 
-        return alpha * genderCost + beta * loadBalanceCost + gamma * prefCost + delta * gradReqCost
+        #unique id's for students rather than names
+
+        prefTotal = 0
+        genTotal = 0
+
+        totalStudents = 0
+        totalCourses = 0
+        stuIDs = []
+        classIDs = []
+        for student, course, alt in self.schedule: #pref is alt
+
+            # the input is the number alternate of the course (0-4), best case being 0 and worst being 4
+            prefTotal += prefCost(alt)
+
+            if (student.ID not in stuIDs):
+                stuIDs.append(student.ID)
+                totalStudents += 1
+
+            if (course.ID not in classIDs):
+                classIDs.append(course.ID)
+                totalCourses += 1
+                # genTotal += genderCostFunc(/(16-course.slotsRemaining)) IM GONNA GO FIX THE WAY SCHEDULE IS ORGANIZED
+
+            #difficulty is getting the gender ratio
+
+
+            # call the genderCost once per course
+
+        prefTotal /= len(self.schedule) #does this equate to number of students or number of classes
+
+        return alpha * genderCost + beta * loadBalanceCost + gamma * prefCost + delta * gradReqCost #want this to be as big as possible
 
 
 class BasicScheduler(Scheduler):
@@ -117,8 +145,8 @@ class BasicScheduler(Scheduler):
             if course == '': continue
 
             # Get all sections of a particular course
-            courses = [x for x in self.classes if 
-                       ClassCode.getClassCodeFromTitle(x.classCode) == 
+            courses = [x for x in self.classes if
+                       ClassCode.getClassCodeFromTitle(x.classCode) ==
                        ClassCode.getClassCodeFromTitle(course)]
             random.shuffle(courses)
 

@@ -52,9 +52,8 @@ class Scheduler:
         # Creates and binds the engine
 
         # For each row, generates the database entry
-        for row in self.schedule:
-            # row[0] is models.Student, row[1] is pymodels.Class
-            if row is not None:
+        for student in self.schedule:
+            for course, alt in self.schedule[student]:
                 scheduleEntry = pymodels.Schedule(None, row[0].ID, row[0], row[1].ID, row[1].__export__())
                 self.session.add(scheduleEntry.__export_new__())
 
@@ -119,7 +118,7 @@ class BasicScheduler(Scheduler):
         self.fails = 0
         self.totalassignments = 0
 
-        schedule = []
+        schedule = {}
 
         # Shuffle the order of request objects, and process them sequentially
         random.shuffle(self.requests)
@@ -127,7 +126,7 @@ class BasicScheduler(Scheduler):
             # Get associated student object
             student = req.student
 
-            schedule.append(self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]]))
+            schedule[student] = self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]])
 
         self.schedule = schedule
         return schedule
@@ -137,12 +136,13 @@ class BasicScheduler(Scheduler):
 
         # returns a (student, section, preference) triple, or None if no class could be assigned
 
-        allClasses = [student,]
+        allClasses = []
 
-        print('assigning', student.name, end='')
         for request in requests:
+            print('assigning', student.name, end='')
             for alt, course in enumerate(request):
                 if course == '': continue
+                assigned = False
 
                 # Get all sections of a particular course
                 courses = [x for x in self.classes if
@@ -150,17 +150,21 @@ class BasicScheduler(Scheduler):
                            ClassCode.getClassCodeFromTitle(course)]
                 random.shuffle(courses)
 
-                for course in courses:
-                    if course.slotsRemaining > 0:
-                        course.slotsRemaining -= 1
-                        print('\tcourse assigned:', course.classCode)
-                        allClasses.append([course, alt])
+                for c in courses:
+                    if c.slotsRemaining > 0:
+                        c.slotsRemaining -= 1
+                        print('\tcourse assigned:', c.classCode)
+                        allClasses.append((c, alt))
+                        assigned = True
                         break
-                    print('\tsection full, {} students left, going to next one'.format(course.slotsRemaining))
+                    print('\tsection full, {} students left, going to next one'.format(c.slotsRemaining))
+                
+                if assigned: break
+
                 print('\tcourse full, proceeding to alternates')
 
+        self.fails += len(requests) - len(allClasses)
         return allClasses
-        self.fails += 1
 
         # If this is consistently returned, then there is no space left in any of the alternates
         print('\tWARNING: could not assign student')
@@ -192,7 +196,7 @@ def generateSchedule():
 
     # Perform scheduling
     scheduler.generateSchedule()
-    scheduler.commit()
+    #scheduler.commit() #scheduler.commit() is currently broken
     # TODO: Update objects modified in generateSchedule(), then commit
 
     # Commit

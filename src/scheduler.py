@@ -22,6 +22,8 @@ from src.integrity_test import generateStudentObject
 
 import random
 
+from tqdm import tqdm
+
 CONNECT_STRING='sqlite+pysqlite:///../schedule.db'
 DEBUG=True
 
@@ -62,6 +64,17 @@ class Scheduler:
             self.session.close()
 
 
+    def costPerCourse(self, course):
+        genderCostFunc = lambda x :  (-4)*(x**2 - x) #optimized at 1/2 at which point y = 1
+
+        genderRatio = sum([x.sex for x in self.schedule[course]]) / len(self.schedule[course])
+        genderCost = genderCostFunc(genderRatio)
+        
+        for student in self.schedule[course]:
+            # Do something for each student in the course
+            pass
+
+
     # cost function that evalutes performance of the algorithm
     def cost(self):
         # Hyperparameters - not prioritized
@@ -76,7 +89,7 @@ class Scheduler:
         gradReqCost = 0
 
         # the input is the ratio of one gender (i.e. boys) to the total number of students
-        genderCostFunc = lambda x :  (-4)*(x**2 - x) #optimized at 1/2 at which point y = 1
+
 
         prefCost = lambda x : (-1/16)*(x**2) + 1
 
@@ -122,7 +135,9 @@ class BasicScheduler(Scheduler):
 
         # Shuffle the order of request objects, and process them sequentially
         random.shuffle(self.requests)
-        for req in self.requests:
+
+        # tqdm is experimental here; it is used to show progress of scheduling
+        for req in tqdm(self.requests, ascii=True, desc="scheduler progress"):
             # Get associated student object
             student = req.student
 
@@ -139,7 +154,7 @@ class BasicScheduler(Scheduler):
         allClasses = []
 
         for request in requests:
-            print('assigning', student.name, end='')
+            #print('assigning', student.name, end='')
             for alt, course in enumerate(request):
                 if course == '': continue
                 assigned = False
@@ -153,15 +168,15 @@ class BasicScheduler(Scheduler):
                 for c in courses:
                     if c.slotsRemaining > 0:
                         c.slotsRemaining -= 1
-                        print('\tcourse assigned:', c.classCode)
+                        #print('\tcourse assigned:', c.classCode)
                         allClasses.append((c, alt))
                         assigned = True
                         break
-                    print('\tsection full, {} students left, going to next one'.format(c.slotsRemaining))
+                    #print('\tsection full, {} students left, going to next one'.format(c.slotsRemaining))
                 
                 if assigned: break
 
-                print('\tcourse full, proceeding to alternates')
+                #print('\tcourse full, proceeding to alternates')
 
         self.fails += len(requests) - len(allClasses)
         return allClasses

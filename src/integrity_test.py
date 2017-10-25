@@ -28,7 +28,7 @@ def randomString(length):
     return ''.join([alphabet[randrange(len(alphabet))] for x in range(length)])
 
 def generateStudentObject():
-    return models.Student(name=randomString(20), graduatingClass=randint(2015, 2020), studentId=randomString(7), sex=randomString(5), cluster=randomString(10))
+    return models.Student(name=randomString(20), graduatingClass=randint(2015, 2020), studentId=randomString(7), sex=choice([0, 1]), cluster=randomString(10))
 
 def integrity_test():
     print("Beginning integrity test...")

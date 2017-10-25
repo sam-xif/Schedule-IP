@@ -16,13 +16,16 @@ class PyModelBase:
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
 
-    def __hash__(self):
+    def hash(self, exclude=[]):
         # Standard hash function
-        hashes = [self.__dict__[x].__hash__() for x in self.__dict__ if x is not None]
+        hashes = [self.__dict__[x].__hash__() for x in self.__dict__ if x is not None and x not in exclude]
         hashSum = 0
         for hash in hashes:
             hashSum = 31 * hashSum + hash
         return hashSum
+
+    def __hash__(self):
+        return self.hash()
     
 
 

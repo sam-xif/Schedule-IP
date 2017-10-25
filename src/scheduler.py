@@ -63,17 +63,24 @@ class Scheduler:
             self.session.commit()
             self.session.close()
 
+    def getCourseHash(self, course):
+        """
+        Utility function for getting the course object's hash, which excludes mutable fields such as slotsRemaining
+        """
+        return course.hash(exclude=['slotsRemaining'])
 
-    def costPerCourse(self, course):
-        genderCostFunc = lambda x :  (-4)*(x**2 - x) #optimized at 1/2 at which point y = 1
 
-        genderRatio = sum([x.sex for x in self.schedule[course]]) / len(self.schedule[course])
+    """
+    Cost functions
+    """
+    def genderCostPerCourse(self, course):
+        genderCostFunc = lambda x :  1 + (4)*(x**2 - x) #optimized at 1/2 at which point y = 1
+
+        # No need to call getCourseHash on these because the keys of the self.schedule dictionary are already hashes
+        genderRatio = sum([int(x.sex) for x in self.schedule[course]]) / len(self.schedule[course])
         genderCost = genderCostFunc(genderRatio)
         
-        for student in self.schedule[course]:
-            # Do something for each student in the course
-            pass
-
+        return genderCost
 
     # cost function that evalutes performance of the algorithm
     def cost(self):
@@ -91,37 +98,15 @@ class Scheduler:
         # the input is the ratio of one gender (i.e. boys) to the total number of students
 
 
-        prefCost = lambda x : (-1/16)*(x**2) + 1
+        prefCostFunc = lambda x : (-1/16)*(x**2) + 1
 
         #unique id's for students rather than names
 
         prefTotal = 0
         genTotal = 0
 
-        totalStudents = 0
-        totalCourses = 0
-        stuIDs = []
-        classIDs = []
-        for student, course, alt in self.schedule: #pref is alt
-
-            # the input is the number alternate of the course (0-4), best case being 0 and worst being 4
-            prefTotal += prefCost(alt)
-
-            if (student.ID not in stuIDs):
-                stuIDs.append(student.ID)
-                totalStudents += 1
-
-            if (course.ID not in classIDs):
-                classIDs.append(course.ID)
-                totalCourses += 1
-                # genTotal += genderCostFunc(/(16-course.slotsRemaining)) IM GONNA GO FIX THE WAY SCHEDULE IS ORGANIZED
-
-            #difficulty is getting the gender ratio
-
-
-            # call the genderCost once per course
-
-        prefTotal /= len(self.schedule) #does this equate to number of students or number of classes
+        for course in self.schedule:
+            genderCost += self.genderCostPerCourse(course)
 
         return alpha * genderCost + beta * loadBalanceCost + gamma * prefCost + delta * gradReqCost #want this to be as big as possible
 
@@ -131,7 +116,7 @@ class BasicScheduler(Scheduler):
         self.fails = 0
         self.totalassignments = 0
 
-        schedule = {}
+        self.schedule = {}
 
         # Shuffle the order of request objects, and process them sequentially
         random.shuffle(self.requests)
@@ -141,10 +126,10 @@ class BasicScheduler(Scheduler):
             # Get associated student object
             student = req.student
 
-            schedule[student] = self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]])
+            self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]])
 
-        self.schedule = schedule
-        return schedule
+        #self.schedule = schedule
+        #return schedule
 
     def assign(self, student, requests):
         self.totalassignments += 5
@@ -168,22 +153,20 @@ class BasicScheduler(Scheduler):
                 for c in courses:
                     if c.slotsRemaining > 0:
                         c.slotsRemaining -= 1
-                        #print('\tcourse assigned:', c.classCode)
+                        if self.getCourseHash(c) not in self.schedule:
+                            self.schedule[self.getCourseHash(c)] = []
+                            
+                        # Create has of course object, excluding any volatile fields
+                        self.schedule[self.getCourseHash(c)].append(student)
+
                         allClasses.append((c, alt))
                         assigned = True
                         break
-                    #print('\tsection full, {} students left, going to next one'.format(c.slotsRemaining))
                 
                 if assigned: break
 
-                #print('\tcourse full, proceeding to alternates')
-
         self.fails += len(requests) - len(allClasses)
         return allClasses
-
-        # If this is consistently returned, then there is no space left in any of the alternates
-        print('\tWARNING: could not assign student')
-        return None
 
 
 def generateSchedule():
@@ -214,11 +197,14 @@ def generateSchedule():
     #scheduler.commit() #scheduler.commit() is currently broken
     # TODO: Update objects modified in generateSchedule(), then commit
 
+    print('fail_rate:', '{}%'.format((scheduler.fails / scheduler.totalassignments) * 100), '({} / {})'.format(scheduler.fails, scheduler.totalassignments))
+    print(len(classes))
+    print('total cost: {}; avg across courses: {}'.format(scheduler.cost(), scheduler.cost() / len(scheduler.schedule)))
+
+    
     # Commit
     session1.commit()
     session1.close()
-
-    print('fail_rate:', '{}%'.format((scheduler.fails / scheduler.totalassignments) * 100), '({} / {})'.format(scheduler.fails, scheduler.totalassignments))
 
 
 if __name__=="__main__":

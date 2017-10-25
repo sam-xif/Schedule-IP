@@ -55,7 +55,7 @@ class Scheduler:
 
         # For each row, generates the database entry
         for course in self.schedule:
-            for student in self.schedule[course]:
+            for student, alt in self.schedule[course]:
                 courseObj = self.hashDict[course]
                 scheduleEntry = pymodels.Schedule(None, student.ID, student, courseObj.ID, courseObj.__export__())
                 self.session.add(scheduleEntry.__export_new__())
@@ -81,10 +81,19 @@ class Scheduler:
         genderCostFunc = lambda x :  1 + (4)*(x**2 - x) #optimized at 1/2 at which point y = 1
 
         # No need to call getCourseHash on these because the keys of the self.schedule dictionary are already hashes
-        genderRatio = sum([int(x.sex) for x in self.schedule[course]]) / len(self.schedule[course])
+        genderRatio = sum([int(x.sex) for x, alt in self.schedule[course]]) / len(self.schedule[course])
         genderCost = genderCostFunc(genderRatio)
         
         return genderCost
+
+    def prefCostPerCourse(self, course):
+        """
+        Calculates preference cost for each course
+        """
+        prefCostFunc = lambda x : x**2
+
+        prefCost = sum([prefCostFunc(alt) for x, alt in self.schedule[course]])
+        return prefCost
 
     # cost function that evalutes performance of the algorithm
     def cost(self):
@@ -107,8 +116,13 @@ class Scheduler:
             genderCost += self.genderCostPerCourse(course)
 
             # TODO: Calculate other costs here
+            prefCost += self.prefCostPerCourse(course)
 
-        return alpha * genderCost + beta * loadBalanceCost + gamma * prefCost + delta * gradReqCost #want this to be as big as possible
+        return (alpha * genderCost + beta * loadBalanceCost + gamma * prefCost + delta * gradReqCost,
+               genderCost,
+               prefCost,
+               loadBalanceCost,
+               gradReqCost)
 
 
 class BasicScheduler(Scheduler):
@@ -164,7 +178,7 @@ class BasicScheduler(Scheduler):
                             self.hashDict[self.getCourseHash(c)] = c
                             
                         # Create has of course object, excluding any volatile fields
-                        self.schedule[self.getCourseHash(c)].append(student)
+                        self.schedule[self.getCourseHash(c)].append((student, alt))
 
                         allClasses.append((c, alt))
                         assigned = True
@@ -205,7 +219,7 @@ def generateSchedule():
     # TODO: Update objects modified in generateSchedule(), then commit
     # Note: Updates are processed automatically when changes to the pymodels are made
 
-    costInfo = (scheduler.cost(), scheduler.cost() / len(scheduler.schedule))
+    costInfo = (scheduler.cost(), scheduler.cost()[0] / len(scheduler.schedule))
 
     # Commit
     session1.commit()

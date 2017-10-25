@@ -205,14 +205,14 @@ def generateSchedule():
     # TODO: Update objects modified in generateSchedule(), then commit
     # Note: Updates are processed automatically when changes to the pymodels are made
 
-    print('fail_rate:', '{}%'.format((scheduler.fails / scheduler.totalassignments) * 100), '({} / {})'.format(scheduler.fails, scheduler.totalassignments))
-    print(len(classes))
-    print('total cost: {}; avg across courses: {}'.format(scheduler.cost(), scheduler.cost() / len(scheduler.schedule)))
+    costInfo = (scheduler.cost(), scheduler.cost() / len(scheduler.schedule))
 
-    
     # Commit
     session1.commit()
     session1.close()
+
+    print('fail_rate:', '{}%'.format((scheduler.fails / scheduler.totalassignments) * 100), '({} / {})'.format(scheduler.fails, scheduler.totalassignments))
+    print('total cost: {}; avg across courses: {}'.format(*costInfo))
 
 
 if __name__=="__main__":

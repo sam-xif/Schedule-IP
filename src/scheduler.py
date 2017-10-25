@@ -129,7 +129,11 @@ class BasicScheduler(Scheduler):
             # req.student is a regular models object !!!
             student = req.student
 
-            self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]])
+            self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], 
+                                  [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], 
+                                  [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], 
+                                  [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], 
+                                  [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]])
 
         return self.schedule
 

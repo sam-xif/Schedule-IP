@@ -54,9 +54,10 @@ class Scheduler:
         # Creates and binds the engine
 
         # For each row, generates the database entry
-        for student in self.schedule:
-            for course, alt in self.schedule[student]:
-                scheduleEntry = pymodels.Schedule(None, row[0].ID, row[0], row[1].ID, row[1].__export__())
+        for course in self.schedule:
+            for student in self.schedule[course]:
+                courseObj = self.hashDict[course]
+                scheduleEntry = pymodels.Schedule(None, student.ID, student, courseObj.ID, courseObj.__export__())
                 self.session.add(scheduleEntry.__export_new__())
 
         if close:
@@ -74,6 +75,9 @@ class Scheduler:
     Cost functions
     """
     def genderCostPerCourse(self, course):
+        """
+        Calculates the gender cost for each course
+        """
         genderCostFunc = lambda x :  1 + (4)*(x**2 - x) #optimized at 1/2 at which point y = 1
 
         # No need to call getCourseHash on these because the keys of the self.schedule dictionary are already hashes
@@ -90,23 +94,19 @@ class Scheduler:
         gamma = 1
         delta = 1
 
+        # Cost values
         genderCost = 0
         prefCost = 0
         loadBalanceCost = 0
         gradReqCost = 0
 
-        # the input is the ratio of one gender (i.e. boys) to the total number of students
-
-
         prefCostFunc = lambda x : (-1/16)*(x**2) + 1
 
-        #unique id's for students rather than names
-
-        prefTotal = 0
-        genTotal = 0
-
         for course in self.schedule:
+            # *** Calculate gender cost ***
             genderCost += self.genderCostPerCourse(course)
+
+            # TODO: Calculate other costs here
 
         return alpha * genderCost + beta * loadBalanceCost + gamma * prefCost + delta * gradReqCost #want this to be as big as possible
 
@@ -117,6 +117,7 @@ class BasicScheduler(Scheduler):
         self.totalassignments = 0
 
         self.schedule = {}
+        self.hashDict = {}
 
         # Shuffle the order of request objects, and process them sequentially
         random.shuffle(self.requests)
@@ -124,12 +125,13 @@ class BasicScheduler(Scheduler):
         # tqdm is experimental here; it is used to show progress of scheduling
         for req in tqdm(self.requests, ascii=True, desc="scheduler progress"):
             # Get associated student object
+            
+            # req.student is a regular models object !!!
             student = req.student
 
             self.assign(student, [[req.course1, req.c1alt1, req.c1alt2, req.c1alt3], [req.course2, req.c2alt1, req.c2alt2, req.c2alt3], [req.course3, req.c3alt1, req.c3alt2, req.c3alt3], [req.course4, req.c4alt1, req.c4alt2, req.c4alt3], [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]])
 
-        #self.schedule = schedule
-        #return schedule
+        return self.schedule
 
     def assign(self, student, requests):
         self.totalassignments += 5
@@ -155,6 +157,7 @@ class BasicScheduler(Scheduler):
                         c.slotsRemaining -= 1
                         if self.getCourseHash(c) not in self.schedule:
                             self.schedule[self.getCourseHash(c)] = []
+                            self.hashDict[self.getCourseHash(c)] = c
                             
                         # Create has of course object, excluding any volatile fields
                         self.schedule[self.getCourseHash(c)].append(student)
@@ -194,8 +197,9 @@ def generateSchedule():
 
     # Perform scheduling
     scheduler.generateSchedule()
-    #scheduler.commit() #scheduler.commit() is currently broken
+    scheduler.commit()
     # TODO: Update objects modified in generateSchedule(), then commit
+    # Note: Updates are processed automatically when changes to the pymodels are made
 
     print('fail_rate:', '{}%'.format((scheduler.fails / scheduler.totalassignments) * 100), '({} / {})'.format(scheduler.fails, scheduler.totalassignments))
     print(len(classes))

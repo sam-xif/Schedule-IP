@@ -25,7 +25,7 @@ import random
 from tqdm import tqdm
 
 CONNECT_STRING='sqlite+pysqlite:///../schedule.db'
-DEBUG=True
+DEBUG=False
 
 class Scheduler:
     """

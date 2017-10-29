@@ -1,4 +1,4 @@
-"""
+﻿"""
 File containing implementations of scheduling algorithms.
 """
 
@@ -8,4 +8,5 @@ class BipartiteScheduler(BasicScheduler):
     """
     Implementation of scheduling using a bipartite graph algorithm
     """
-    pass
+    def __init__(self, graph):
+        self.graph = graph

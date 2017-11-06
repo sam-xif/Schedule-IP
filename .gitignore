@@ -6,3 +6,4 @@ sln/
 *.db
 *.bu
 *.csv
+*.tmp

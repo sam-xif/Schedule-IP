@@ -11,7 +11,7 @@ class Edge:
         If it is set to 0, the direction is from x -> y
         If it is set to 1, the direction is from y -> x
         """
-        if direction != 0 or direction != 1 or direction is not None:
+        if direction != 0 and direction != 1 and direction is not None:
             raise Exception("Invalid value for direction")
 
         self.xn = xn
@@ -39,14 +39,17 @@ class Edge:
     def __eq__(self, other):
         return self.xn == other.xn and self.yn == other.yn and self.direction == other.direction
 
+    def __hash__(self):
+        return self.xn + self.yn + (0 if self.direction is None else self.direction)
+
 class BipartiteGraph:
     def __init__(self, x, y):
-        if len(x) != len(y):
-            raise Exception("Arguments 'x' and 'y' not of the same length")
+        #if len(x) != len(y):
+        #    raise Exception("Arguments 'x' and 'y' not of the same length")
 
         self.x = x
         self.y = y
-        self.edges = set()
+        self.edges = []
         self.connectedEdges = set()
         self.matching = set()
 

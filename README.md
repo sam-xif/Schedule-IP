@@ -1,5 +1,11 @@
 # Schedule-IP
 
+### External Dependencies
+* `tqdm` (`pip install tqdm`)
+* `sqlalchemy` (`pip install sqlalchemy`)
+* `sqlalchemy-migrate` (`pip install sqlalchemy-migrate`)
+* `sqlite3`
+
 ### Notes and Instructions
 ##### Testing the database
 To perform an integrity check on the database, navigate to the directory of the database, and run the `integrity_test.py` script from that directory.
@@ -19,3 +25,9 @@ Now, run `python manage.py upgrade`. This will upgrade the database to the lates
 More python-friendly versions of the database models exist in `src/pymodels.py`. These are essentially the same as the `models.py` classes but they allow easy comparison for equality and do not use class attributes.
 Instead of inputting the changes from `models.py` by hand, simply run `python generate_pymodels.py`.
 
+### Project Final Report
+In this project, our goal was to write a scheduling algorithm capable of assigning students to courses. We began by setting up a database to hold the necessary information, scraped some of PA's master schedule data to use, and began building an algorithm.
+We ended up implementing the Hungarian Algorithm as the algorithm of choice, as the scheduling problem could be interpreted nicely as finding the optimal matching of a bipartite graph.
+Unfortunately, we did not have enough time to develop this into a full-scale scheduler, but we did get it working with simple scheduling scenarios.
+
+To run a simple scenario, use the command `python simplescenario.py`.

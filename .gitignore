@@ -5,5 +5,5 @@ sln/
 *.py[cod]
 *.db
 *.bu
-*.csv
+#*.csv
 *.tmp

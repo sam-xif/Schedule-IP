@@ -1,0 +1,541 @@
+Course,Period,Teacher,Section,Room,Days
+ARA121: Beginning Arabic,ESA,"Chahwan, G./Meyer, E.A.",1,---,ESA Th7:30pm
+ART225: Visual Studies,1,"Harrigan, M.L.",1,A218,TWextF
+ART225: Visual Studies,1,"Zemlin, T.Y.",2,A113,TWextF
+ART225: Visual Studies,2,"Harrigan, M.L.",3,A218,MWextF
+ART225: Visual Studies,2,"Zemlin, T.Y.",4,A113,MWextF
+ART225: Visual Studies,2,"Gray, Diamond",5,A115,MWextF
+ART225: Visual Studies,3,"Zaeder, S. T.",6,A111,TWextF
+ART225: Visual Studies,3,"Kelman, Rafael",7,A219,TWextF
+ART225: Visual Studies,4,"Zaeder, S. T.",8,A111,MWextF
+ART225: Visual Studies,6,"Kelman, Rafael",9,A219,MWextF
+ART225: Visual Studies,7,"Trespas, E.E.",10,A222,TWextF
+ART225: Visual Studies,7,"Gray, Diamond",11,A115,TWextF
+ART301: Architecture I,2,"Lawson, A.S.",1,BARC,MTWextF
+ART302: Clay and the Ancestral Pot,2,"Zaeder, S. T.",1,BCER,MTWextF
+ART302: Clay and the Ancestral Pot,6,"Zaeder, S. T.",2,BCER,MTWextF
+ART304: Drawing I: Methods and Materials,4,"Trespas, E.E.",1,BDRW,MThextF
+ART304: Drawing I: Methods and Materials,5,"Trespas, E.E.",2,BDRW,TThextF
+"ART305: Painting I: Paint, Palette, and Process",3,"Trespas, E.E.",1,A222,MTThextF
+ART309: Video I,5,"Kelman, Rafael",1,A219,MTThextF
+ART309: Video I,7,"Kelman, Rafael",2,A219,MTWextF
+ART310: Digital Photography I,3,"Harrigan, M.L.",1,A218,MTThextF
+ART310: Digital Photography I,4,"Harrigan, M.L.",2,A218,MTThextF
+ART400: Visual Culture: Discovering the Addison,5,"Sparling Williams, S.",1,A231,TThextF
+ART441: Histories of Art,6,"Fox, D.U.",1,A231,MTThextF
+ART501: Architecture II,2,"Lawson, A.S.",1,BARC,MTWextF
+ART600A: Advanced Studio Art,7-Jun,"Zemlin, T.Y.",1,A113,MextThext+8-9:15pm T 8-9:15pm
+BIO100A:Introduction to Biology,1,"Damore, Sara",1,GB107,MTWextF
+BIO100A:Introduction to Biology,1,"Mundra, R.R.",2,GB106,MTWextF
+BIO100A:Introduction to Biology,2,"Damore, Sara",3,GB107,MTWextF
+BIO100A:Introduction to Biology,2,"Mundra, R.R.",4,GB106,MTWextF
+BIO100A:Introduction to Biology,3,"Navarro Peralta, J.",5,GB111,MTThextF
+BIO100A:Introduction to Biology,3,"Meyer, J.K.",6,GB106,MTThextF
+BIO100A:Introduction to Biology,3,"Kemp, C.J.",7,GB107,MTThextF
+BIO100A:Introduction to Biology,4,"Abasi, Unwana",8,GB111,MTThextF
+BIO100A:Introduction to Biology,5,"Kemp, C.J.",9,GB107,MTThextF
+BIO100A:Introduction to Biology,5,"Holley, Jr., L.M.",10,GB106,MTThextF
+BIO100A:Introduction to Biology,6,"Sit, Jonathan",11,GB111,MTThextF
+BIO100A:Introduction to Biology,6,"Navarro Peralta, J.",12,GB107,MTThextF
+BIO100A:Introduction to Biology,7,"Abasi, Unwana",13,GB107,MTWextF
+BIO100A:Introduction to Biology,7,"Sit, Jonathan",14,GB111,MTWextF
+BIO100A:Introduction to Biology,7,"Holley, Jr., L.M.",15,GB106,MTWextF
+BIO420: Animal Behavior,6,"Bailey, Andrea",1,GB103,MTThextF
+BIO420: Animal Behavior,7,"Bailey, Andrea",2,GB103,MTWextF
+BIO501: Topics in Advanced Biology I,1,"Hagler, J.C.",1,GB102,MTWextF
+BIO501: Topics in Advanced Biology I,2,"Marshall-Walker, C.",2,GB102,MTWextF
+BIO501: Topics in Advanced Biology I,3,"Hagler, J.C.",3,GB102,MTThextF
+BIO501: Topics in Advanced Biology I,4,"Holley, Jr., L.M.",4,GB102,MTThextF
+BIO501: Topics in Advanced Biology I,5,"Damore, Sara",5,GB102,MTThextF
+BIO501: Topics in Advanced Biology I,6,"Damore, Sara",6,GB102,MTThextF
+BIO501: Topics in Advanced Biology I,7,"Marshall-Walker, C.",7,GB102,MTWextF
+BIO581: Cellular Biology,1-Feb,"Robinson, K.A.",1,GB109,MextTWextF per2 w/ per 1 on Monday
+BIO581: Cellular Biology,4-Mar,"Bailey, Andrea",2,GB109,MTextThextF per3 w/ per 4 on Tuesday
+BIO581: Cellular Biology,5-Apr,"Hagler, J.C.",3,GB109,MextTThextF per4 w/ per 5 on Monday
+BIO581: Cellular Biology,7-Jun,"Hagler, J.C.",4,GB109,MextTThextF per6 w/per 7 on Monday
+BIO600: Biology Lab Research,1&2,"Kemp, C.J.",1,GB110,"MextTextWextFext Per 1&2 M,T, W, F"
+BIO600: Biology Lab Research,3&4,"Marshall-Walker, C.",2,GB110,"MextTextThextFext Per 3&4 M,T, Th, F"
+CHI100A: First-Level Chinese,1,"Zhao, C.",1,S115,MTWextF
+CHI200A:Second-Level Chinese,1,"Reitz, Ben",1,SB16,MTWextF
+EBI09: Foundations,TBA,"Fenton, M.G.",6,B205,TBA
+EBI09: Foundations,TBA,"Gardner, D.C.",7,B102,TBA
+EBI09: Foundations,TBA,"Hagler, J.C.",8,B211,TBA
+EBI09: Foundations,TBA,"Hession, M.C.",9,SB05,TBA
+EBI09: Foundations,TBA,"Hilton, S.T.",10,B202,TBA
+EBI09: Foundations,TBA,"Hurley, D.P.",11,M207,TBA
+EBI09: Foundations,TBA,"Lisa, M.J.",12,M202,TBA
+EBI09: Foundations,TBA,"Mundra, R.R.",13,B201,TBA
+EBI09: Foundations,TBA,"Murata, Ms. A.S.",14,M201,TBA
+EBI09: Foundations,TBA,"Parker, T.R.",15,S202,TBA
+EBI09: Foundations,TBA,"Patel, A.",16,WC122,TBA
+EBI09: Foundations,TBA,"Ware, Taylor",17,M308,TBA
+EBI09: Foundations,TBA,"Richie, G.F.",18,B207,TBA
+EBI10: Endeavors,1,"Strong, E.E.",1,BB09,M
+EBI10: Endeavors,1,"Richie, G.F.",2,BB13,M
+EBI10: Endeavors,1,"Joel, E.M.",3,B102,M
+EBI10: Endeavors,1,"Artacho Guerra, C.",4,B202,M
+EBI10: Endeavors,1,"Esty, Susan",5,B203,M
+EBI10: Endeavors,2,"Navarro Peralta, J.",6,BB05,T
+EBI10: Endeavors,2,"Heon, S.",7,BB09,T
+EBI10: Endeavors,2,"Hession, R.S.",8,B202,T
+EBI10: Endeavors,3,"Mann, J.D.",9,BB05,M
+EBI10: Endeavors,3,"Pierre, Jessica",10,BB09,M
+EBI10: Endeavors,3,"Tousignant, C.D.",11,B211,M
+EBI10: Endeavors,4,"Strong, E.E.",12,BB05,T
+EBI10: Endeavors,4,"Hession, R.S.",13,B201,T
+EBI10: Endeavors,4,"Joseph, E.C.",14,B207,T
+EBI10: Endeavors,5,"Ware, Taylor",15,BB05,M
+EBI10: Endeavors,5,"Esty, Susan",16,B105,M
+EBI10: Endeavors,6,"Farnsworth, D.",17,BB09,T
+EBI10: Endeavors,6,"Candelario Escobar, A.",18,B107,T
+EBI10: Endeavors,6,"Ma, L.",19,B210,T
+EBI10: Endeavors,7,"Cormier, S.",20,BB05,M
+EBI10: Endeavors,7,"Murphy, P.D.",21,BB10,M
+EBI10: Endeavors,7,"Esty, Susan",22,BB13,M
+EBI10: Endeavors,7,"Mackinson, B.L.",23,B203,M
+ENG100A: An Introduction,1,"Tousignant, C.D.",1,BB10,MTWF
+ENG100A: An Introduction,1,"Hallgren, Sherri",2,B105,MTWF
+ENG100A: An Introduction,1,"Wilkin, G.J.",3,B209,MTWF
+ENG100A: An Introduction,2,"Tousignant, C.D.",4,BB10,MTWF
+ENG100A: An Introduction,2,"Domina, J.C.",5,B102,MTWF
+ENG100A: An Introduction,2,"Heffernan, K.",6,B203,MTWF
+ENG100A: An Introduction,3,"Chase, D.M.",7,B105,MTThF
+ENG100A: An Introduction,3,"Wilkin, G.J.",8,B210,MTThF
+ENG100A: An Introduction,4,"Chase, D.M.",9,BB09,MTThF
+ENG100A: An Introduction,4,"Tousignant, C.D.",10,BB10,MTThF
+ENG100A: An Introduction,4,"Calleja, L.R.",11,B107,MTThF
+ENG100A: An Introduction,5,"Chase, D.M.",12,BB13,MTThF
+ENG100A: An Introduction,5,"Fulton, M.L.",13,B107,MTThF
+ENG100A: An Introduction,6,"Domina, J.C.",14,B102,MTThF
+ENG100A: An Introduction,7,"Domina, J.C.",15,B102,MTWF
+ENG100A: An Introduction,7,"Calleja, L.R.",16,B207,MTWF
+ENG100A: An Introduction,7,"Tapia, Jineyda",17,B211,MTWF
+ENG100A: An Introduction,7,"Richie, G.F.",18,WC121,MTWF
+"ENG200A: Writing to Read, Reading to Write",1,"Bernieri, L.M.",1,B210,TWextF
+"ENG200A: Writing to Read, Reading to Write",1,"Talarico, Ben",2,BB13,TWextF
+"ENG200A: Writing to Read, Reading to Write",1,"Quijas, Jen",3,B102,TWextF
+"ENG200A: Writing to Read, Reading to Write",1,"Tortorella, P.F.",4,B202,TWextF
+"ENG200A: Writing to Read, Reading to Write",1,"Guerrero, D.",5,B203,TWextF
+ENG531SH: Shakespeare,3,"Domina, J.C.",1,BB09,TThextF
+ENG537JA: Writers in Depth: Austen,1,"Fulton, M.L.",1,B107,TWextF
+ENG539CM: Christopher Marlowe,7,"Bird, J.E.",1,BB09,MTWF
+ENG541AA: African American Literature,1,"Kane, T.H.",1,B205,TWextF
+ENG541AS: Asian/American Literature and Film,2,"Martin, Coreen",1,B107,MWextF
+ENG541WW: Women's Studies and Literature,4,"Staffaroni, E.R.",1,BB13,MThextF
+ENG546ML: Medieval Literature,2,"Har, P.R.",1,B211,MWextF
+ENG546MO: Modernism,3,"Tousignant, C.D.",1,B201,TThextF
+ENG548AR: The American Renaissance,2,"Gardner, D.C.",1,B210,MWextF
+FRE100A: First Level French,1,"Ferguson, A.",1,S216,MTWextF
+FRE100A: First Level French,3,"Gonzalez, Kevin",2,S215,MTThextF
+FRE200A: Second Level French,1,"Gonzalez, Kevin",1,S215,MTWextF
+FRE200A: Second Level French,2,"Pickering, D.J.",2,S216,MTWextF
+FRE200A: Second Level French,6,"Ferguson, A.",3,S216,MTThextF
+FRE300A: Third Level French,1,"Poland, E.R.",1,S116,MTWextF
+FRE300A: Third Level French,2,"Hughes, E.",2,S215,MTWextF
+FRE300A: Third Level French,5,"Poland, E.R.",3,S116,MTThextF
+FRE300A: Third Level French,6,"Odjo, E.A.",4,S116,MTThextF
+FRE401: The Francophone World,3,"Poland, E.R.",1,S216,MTThF
+FRE401: The Francophone World,5,"Hughes, E.",2,S215,MTThF
+FRE411: Crossing Cultures,7,"Pickering, D.J.",1,S216,MTWF
+"FRE520A: French Civilization, Literature, Cinema",3,"Odjo, E.A.",1,S116,MTThextF
+"FRE520A: French Civilization, Literature, Cinema",7,"Odjo, E.A.",2,S116,MTWextF
+FRE621: Advanced Topics in French,6,"Hughes, E.",1,S215,MThextF
+GER100A: First Level German,1,"Svec, L.",1,SB09,MTWextF
+GER100A: First Level German,5,"Duclos, B.T.",2,SB09,MTThextF
+GER200A: Second Level German,7,"Duclos, B.T.",1,SB09,MTWextF
+GER250: Accelerated Second -Level German,3,"Svec, L.",1,SB09,MTThextF
+GER300A: Third-Level German,4,"Svec, L.",1,SB09,MTThF
+GER401: Fourth-Level German,2,"Svec, L.",1,SB09,MTWextF
+GER520: Advanced Fourth-Level German,2,"Svec, L.",1,SB09,MTWextF
+GER601: Advanced Topics in German,3,"Duclos, B.T.",1,SB16,MTThF
+HSS100A: World History 600 B.C.E - 600 C.E.,1,"Monroe, E.A.",1,SB01,TWextF
+HSS100A: World History 600 B.C.E - 600 C.E.,1,"Hess, M.",2,SB02,TWextF
+HSS100A: World History 600 B.C.E - 600 C.E.,2,"Fritz, T.",3,SB04,MWextF
+HSS100A: World History 600 B.C.E - 600 C.E.,3,"Monroe, E.A.",4,S202,TThextF
+HSS100A: World History 600 B.C.E - 600 C.E.,3,"Frey, E.",5,S203,TThextF
+HSS100A: World History 600 B.C.E - 600 C.E.,4,"Frey, E.",6,S203,MThextF
+HSS100A: World History 600 B.C.E - 600 C.E.,5,"Monroe, E.A.",7,S204,TThextF
+HSS100A: World History 600 B.C.E - 600 C.E.,6,"Fritz, T.",8,SB04,MThextF
+HSS100A: World History 600 B.C.E - 600 C.E.,7,"Doheny, M.A.",9,SB02,TWextF
+HSS100A: World History 600 B.C.E - 600 C.E.,7,"Walker, Alec",10,S201,TWextF
+HSS201: World History 1400 C.E. - 1800 C.E.,1,"Mulligan, M.M.",1,S101,TWextF
+HSS201: World History 1400 C.E. - 1800 C.E.,1,"Ballout, L.K.",2,S102,TWextF
+HSS201: World History 1400 C.E. - 1800 C.E.,2,"Dahm, Clair",3,SB03,MWextF
+HSS201: World History 1400 C.E. - 1800 C.E.,2,"Mulligan, M.M.",4,S101,MWextF
+HSS201: World History 1400 C.E. - 1800 C.E.,2,"Villanueva, M.",5,S204,MWextF
+HSS201: World History 1400 C.E. - 1800 C.E.,3,"Ballout, L.K.",6,S102,TThextF
+HSS201: World History 1400 C.E. - 1800 C.E.,3,"Walker, Alec",7,SB04,TThextF
+HSS201: World History 1400 C.E. - 1800 C.E.,4,"Villanueva, M.",8,S204,MThextF
+HSS201: World History 1400 C.E. - 1800 C.E.,5,"Sanchez, J.",9,S203,TThextF
+HSS201: World History 1400 C.E. - 1800 C.E.,5,"Jones, C.L.",10,S201,TThextF
+HSS201: World History 1400 C.E. - 1800 C.E.,6,"Sanchez, J.",11,S203,MThextF
+HSS201: World History 1400 C.E. - 1800 C.E.,6,"Dahm, Clair",12,SB03,MThextF
+HSS201: World History 1400 C.E. - 1800 C.E.,7,"Ramos, M.",13,S104,TWextF
+HSS201: World History 1400 C.E. - 1800 C.E.,7,"Hess, MacKenzie",14,S103,TWextF
+HSS300A: The United States,1,"Dahm, Clair",1,SB03,TWextF
+HSS300A: The United States,1,"Sanchez, J.",2,S103,TWextF
+HSS300A: The United States,1,"Villanueva, M.",3,S201,TWextF
+MTH300A: Algebra Consolidation,3,"Hurley, D.P.",1,M206,MTThextF
+MTH300A: Algebra Consolidation,5,"Candelario Escobar, A.",2,M308,MTThextF
+MTH320: Precalculus,1,"Hurley, D.P.",1,M206,MTWextF
+MTH320: Precalculus,1,"Domenech-Burgos, D.",2,M308,MTWextF
+MTH320: Precalculus,2,"Domenech-Burgos, D.",3,M308,MTWextF
+MTH320: Precalculus,3,"Kost, Donnie",4,M202,MTThextF
+MTH320: Precalculus,3,"Olander, D.M.",5,M308,MTThextF
+MTH320: Precalculus,4,"Hurley, D.P.",6,M206,MTThextF
+MTH320: Precalculus,5,"Amanfu, L.B.",7,M203,MTThextF
+MTH320: Precalculus,7,"Kost, Donnie",8,M203,MTWextF
+MTH330: Precalculus,1,"Jester, Logan",1,M208,MTWextF
+MTH330: Precalculus,2,"El Alam, N.",2,M307,MTWextF
+MTH330: Precalculus,2,"McHugh, M.J.",3,M208,MTWextF
+MTH330: Precalculus,3,"Cleare, N.R.",4,M113,MTThextF
+MTH330: Precalculus,4,"Cleare, N.R.",5,M113,MTThextF
+MTH330: Precalculus,6,"Jester, Logan",6,M208,MTThextF
+MTH330: Precalculus,5,"McHugh, M.J.",7,M208,MTThextF
+MTH330: Precalculus,7,"Odden, C.T.",8,M301,MTWextF
+MTH340: Precalculus,3,"Bacon, B.W.",1,M203,MTThextF
+MTH340: Precalculus,4,"Bacon, B.W.",2,M203,MTThextF
+MTH340: Precalculus,7,"Candelario Escobar, A.",3,M308,MTWextF
+MTH350: Precalculus Trigonometry,1,"Landes, Emily",1,M101,MTWextF
+MTH350: Precalculus Trigonometry,2,"Landes, Emily",2,M101,MTWextF
+MTH350: Precalculus Trigonometry,2,"Hurley, D.P.",3,M206,MTWextF
+MTH350: Precalculus Trigonometry,3,"Schneider, D.J.",4,M302,MTThextF
+MTH350: Precalculus Trigonometry,4,"Epstein, C.B.",5,M201,MTThextF
+MTH350: Precalculus Trigonometry,5,"El Alam, N.",6,M101,MTThextF
+MTH350: Precalculus Trigonometry,6,"Schneider, D.J.",7,M302,MTThextF
+MTH350: Precalculus Trigonometry,7,"El Alam, N.",8,M101,MTWextF
+MTH350: Precalculus Trigonometry,7,"Epstein, C.B.",9,M206,MTWextF
+MTH360: Precalculus Parametric and Polar Curves,1,"Russell, S.W.",1,M301,MTWextF
+MTH360: Precalculus Parametric and Polar Curves,2,"Hoenig, S.W.",2,M301,MTWextF
+MTH360: Precalculus Parametric and Polar Curves,4,"Russell, S.W.",3,M308,MTThextF
+MTH360: Precalculus Parametric and Polar Curves,5,"DoBa, K.",4,M207,MTThextF
+MTH360: Precalculus Parametric and Polar Curves,6,"Epstein, C.B.",5,M206,MTThextF
+MTH360: Precalculus Parametric and Polar Curves,7,"DoBa, K.",6,M207,MTWextF
+MTH380A: Accelerated Precalculus,6,"Odden, C.T.",1,M301,MTThextF
+MTH400: Elementary Functions II,3,"Murphy, P.D.",1,M207,MTThextF
+MTH510: Calculus,3,"Fulford, S.",1,M303,MTThextF
+MTH510: Calculus,4,"Fulford, S.",2,M303,MTThextF
+MTH510: Calculus,7,"Buckwalter, S.E.",3,M303,MTWextF
+MTH530A: AP Statistics (I),1,"Greenberg, E.M.",1,M201,MTWextF
+MTH530A: AP Statistics (I),2,"Greenberg, E.M.",2,M201,MTWextF
+MTH530A: AP Statistics (I),5,"Landes, Emily",3,M202,MTThextF
+MTH530A: AP Statistics (I),6,"Landes, Emily",4,M202,MTThextF
+MTH530A: AP Statistics (I),7,"Russell, S.W.",5,M113,MTWextF
+MTH570A: AP AB Calculus II,1,"Bacon, B.W.",1,M203,MTWextF
+MTH570A: AP AB Calculus II,2,"Bacon, B.W.",2,M203,MTWextF
+MTH570A: AP AB Calculus II,3,"Russell, S.W.",3,M101,MTThextF
+MTH570A: AP AB Calculus II,4,"Wall, H.E.",4,M307,MTThextF
+MTH575A: AP Accelerated AB Calculus,4,"Lisa, M.J.",1,M202,MTThextF
+MTH575A: AP Accelerated AB Calculus,7,"Lisa, M.J.",2,M208,MTWextF
+MTH590A: BC Calculus (II),1,"Amanfu, L.B.",1,M202,MTWextF
+MTH590A: BC Calculus (II),1,"Joseph, E.C.",2,M306,MTWextF
+MTH590A: BC Calculus (II),5,"Litvin, M.M.",3,M302,MTThextF
+MTH590A: BC Calculus (II),2,"Amanfu, L.B.",4,M202,MTWextF
+MTH590A: BC Calculus (II),2,"Cleare, N.R.",5,M113,MTWextF
+MTH590A: BC Calculus (II),3,"Epstein, C.B.",6,M201,MTThextF
+MTH590A: BC Calculus (II),3,"Odden, C.T.",7,M301,MTThextF
+PHY400A: College Physics I,4,"Golini, Tracey",8,GB210,MTThextF
+PHY400A: College Physics I,5,"Rogers, J.E.",9,GB208,MTThextF
+PHY400A: College Physics I,6,"Rea, D.P.",10,GB208,MTThextF
+PHY400A: College Physics I,7,"Rea, D.P.",11,GB208,MTWextF
+PHY400A: College Physics I,7,"Golini, Tracey",12,GB210,MTWextF
+PHY400A: College Physics I,1,"Golini, Tracey",13,GB211,MTWextF
+PHY420: Robotics,7,"Artacho Guerra, C.",1,OWHM,MTWextF
+PHY440: Astronomy,2,"Odden, C.E.",1,GB207,MTF + T 8:15-9pm Tues 8:15-9 pm lab
+PHY440: Astronomy,7,"Whitesides, Lindsay",2,GB207,MTF + T 9-9:45pm Tues 9-9:45 lab
+PHY530: Astronomy Research,3,"Odden, C.E.",1,GB207,MTThextF
+PHY550A: Calculus-Based Physics,1,"Sun, R.F.",1,GB208,MTWextF
+PHY550A: Calculus-Based Physics,2,"Latva-Kokko, M.E.",2,GB208,MTWextF
+PHY550A: Calculus-Based Physics,3,"Rogers, J.E.",3,GB208,MTThextF
+PHY550A: Calculus-Based Physics,4,"Rogers, J.E.",4,GB208,MTThextF
+PHY550A: Calculus-Based Physics,5,"Yao, F.",5,GB210,MTThextF
+PHY550A: Calculus-Based Physics,6,"Yao, F.",6,GB210,MTThextF
+PHY550A: Calculus-Based Physics,6,"Rogers, J.E.",7,GB206,MTThextF
+PHY550A: Calculus-Based Physics,7,"Sun, R.F.",8,GB206,MTWextF
+PHY630: Fluid Mechanics,5,"Latva-Kokko, M.E.",1,GB207,TThextF
+PHY630: Fluid Mechanics,6,"Latva-Kokko, M.E.",2,GB207,MTThextF
+RUS100A: First-Level Contemporary Russian,1,"Svec, V.",1,SB10,MTWextF
+RUS100A: First-Level Contemporary Russian,2,"Svec, V.",2,SB10,MTWextF
+RUS200A: Second-Level Contemporary Russian,4,"Archambault, K.M.",1,SB10,MTThextF
+RUS250: Accelerated Second-Level Russian,7,"Archambault, K.M.",1,SB10,MTWextF
+RUS300A: Third-Level Russian,7,"Archambault, K.M.",1,SB10,MTWextF
+RUS401: Fourth-Level Russian,3,"Svec, V.",1,SB10,MTThF
+RUS520A: Advanced Fourth-Level Russian,3,"Svec, V.",1,SB10,MTThF
+RUS601:Advanced Topics in Russian,6,"Svec, V.",1,SB10,MTThF
+SCI430: Water and Humanity,1,"Mackinson, B.L.",1,G111,MTWextF
+SCI470: Human Origins,2,"Wheeler, Ryan",1,PEAB,MTWextF
+SPA100A: First-Level Spanish,1,"Matheson, K.",1,S209,MTWextF
+SPA100A: First-Level Spanish,3,"Allen, Y.B.",3,S210,MTThextF
+SPA100A: First-Level Spanish,4,"Matheson, K.",4,S209,MTThextF
+SPA100A: First-Level Spanish,5,"Cutler, M.A.",5,S214,MTThextF
+SPA100A: First-Level Spanish,7,"Cutler, M.A.",6,S214,MTWextF
+SPA200A: Second-Level Spanish,1,"Escobar, E.",1,S210,MTWextF
+SPA200A: Second-Level Spanish,1,"McCloskey, Erin",2,S214,MTWextF
+SPA200A: Second-Level Spanish,2,"Escobar, E.",3,S214,MTWextF
+SPA200A: Second-Level Spanish,3,"Hyland, R.A.",4,S209,MTThextF
+SPA200A: Second-Level Spanish,5,"Escobar, E.",5,S209,MTThextF
+SPA200A: Second-Level Spanish,6,"Isaza-Bishop, C.",6,S214,MTThextF
+SPA200A: Second-Level Spanish,7,"Hyland, R.A.",7,S213,MTWextF
+SPA200A: Second-Level Spanish,2,"Allen, Y.B.",8,S210,MTWextF
+SPA220: Accelerated Spanish Sequence,1,"Dominique Moreno, C.",1,S213,MTWextF
+SPA220: Accelerated Spanish Sequence,2,"Dominique Moreno, C.",2,S213,MTWextF
+SPA300A: Third-Level Spanish,1,"Peralta, Teresa",1,S113,MTWextF
+SPA300A: Third-Level Spanish,2,"Matheson, K.",2,S209,MTWextF
+SPA300A: Third-Level Spanish,3,"Dominique Moreno, C.",3,S213,MTThextF
+SPA300A: Third-Level Spanish,4,"Maier, J.R.",4,S210,MTThextF
+SPA300A: Third-Level Spanish,5,"Dominique Moreno, C.",5,S213,MTThextF
+SPA300A: Third-Level Spanish,6,"Matheson, K.",6,S213,MTThextF
+SPA300A: Third-Level Spanish,7,"Peralta, Teresa",7,S113,MTWextF
+SPA401: Current Events and Multimedia,2,"Munoz-Fernandez, C.",1,S113,MWextF
+SPA401: Current Events and Multimedia,6,"Escobar, E.",2,S209,MThextF
+SPA401: Current Events and Multimedia,7,"Isaza-Bishop, C.",3,S209,TWextF
+SPA411: Introduction to Hispanic Literature,5,"Maier, J.R.",1,S210,TThextF
+SPA411: Introduction to Hispanic Literature,7,"Maier, J.R.",2,S210,TWextF
+SPA501: Advanced Spanish Language Colloquium,3,"Cutler, M.A.",1,S214,TThextF
+SPA521: Understanding Latin America,5,"Hyland, R.A.",1,S113,TThextF
+"SPA621: Our Americas"": Crossing Borders""",3,"Munoz-Fernandez, C.",1,S113,TThextF
+CHI220: Accelerated Chinese Sequence,2,"Ma, L.",1,SB15,MTWextF
+CHI220: Accelerated Chinese Sequence,3,"Ma, L.",2,SB15,MTThextF
+CHI300A:Third-Level Chinese,2,"Reitz, Ben",1,SB16,MTWF
+CHI420A: Accelerated Chinese Sequence,6,"Cai-Hurteau, L.",1,SB15,MTThF
+CHI420A: Accelerated Chinese Sequence,7,"Cai, Ying",2,SB16,MTWF
+CHI440A: Introductory Chinese Reading,7,"Ma, L.",1,S115,MTWF
+CHI520A: Advanced Chinese Sequence,3,"Zhao, C.",1,S115,MTThF
+CHI520A: Advanced Chinese Sequence,4,"Zhao, C.",2,S115,MTThF
+CHI520A: Advanced Chinese Sequence,6,"Reitz, Ben",3,SB16,MTThF
+CHI541: Intermediate Reading in Modern Chinese,4,"Cai, Ying",1,SB15,MTThF
+CHI621: Advanced Topics in Chinese,7,"Cai-Hurteau, L.",1,SB15,MTWF
+CHM250A: Introduction to Chemistry,1,"Lee, Nora",1,GB301,MTWextF
+CHM250A: Introduction to Chemistry,2,"Lee, Nora",2,GB301,MTWextF
+CHM250A: Introduction to Chemistry,3,"Robinson, K.A.",3,GB301,MTThextF
+CHM250A: Introduction to Chemistry,5,"Robinson, K.A.",4,GB301,MTThextF
+CHM250A: Introduction to Chemistry,7,Meyer J.K.,5,GB301,MTWextF
+CHM300A:College Chemistry,1,"Wall, Andy",1,GB309,MTWextF
+CHM300A:College Chemistry,1,"Berger, Emma",2,GB308,MTWextF
+CHM300A:College Chemistry,2,"Wall, Andy",3,GB309,MTWextF
+CHM300A:College Chemistry,2,"Cardozo, K.F.",4,GB313,MTWextF
+CHM300A:College Chemistry,3,"Frank, Peter",5,GB308,MTThextF
+CHM300A:College Chemistry,4,"Mackinson, B.L.",6,GB309,MTThextF
+CHM300A:College Chemistry,4,"Frank, Peter",7,GB308,MTThextF
+CHM300A:College Chemistry,5,"Wall, Andy",8,GB307,MTThextF
+CHM300A:College Chemistry,5,"Mackinson, B.L.",9,GB309,MTThextF
+CHM300A:College Chemistry,6,"Cardozo, K.F.",10,GB313,MTThextF
+CHM300A:College Chemistry,6,"Frank, Peter",11,GB308,MTThextF
+CHM300A:College Chemistry,7,"Cardozo, K.F.",12,GB313,MTWextF
+CHM300A:College Chemistry,7,"Berger, Emma",13,GB308,MTWextF
+CHM500A: Advanced Placement Chemistry,6,"Meyer, J.K.",1,GB301,MTThextF
+CHM550A: Accelerated Adv. Placement Chemistry,3,"Cardozo, K.F.",1,GB309,MTThextF
+CHM550A: Accelerated Adv. Placement Chemistry,6,"Wall, Andy",2,GB309,MTThextF
+CHM550A: Accelerated Adv. Placement Chemistry,7,"Frank, Peter",3,GB309,MTWextF
+CHM580A: Advanced College Chemistry,1,"Hilton, S.T.",1,GB307,MTWextF
+CHM580A: Advanced College Chemistry,2,"Hilton, S.T.",2,GB307,MTWextF
+CHM580A: Advanced College Chemistry,3,"Faulk, B.D.",3,GB307,MTThextF
+CHM610: Organic Chemistry,2,"Faulk, B.D.",1,GB308,MTWextF
+CLA150A: Beginning Attic Greek,1,"Mann, J.D.",1,PA,MTWextF (ESA Hybrid)
+CLA400A: Accelerated Greek Sequence,5,"Kip, N.V.",1,PD,MTThextF
+CLA420: The Art of Persuasion,1,"Meyer, E.A.",1,PG,TWextF
+CLA500A: Greek: Homer and Classical Authors,7,"Meyer, E.A.",1,PG,MTWextF
+CLA551: The Epic Tradition,6,"Mann, J.D.",1,PA,MTThF
+CSC350: Programming Fundamentals,4,"Jiang, Kevin",1,M302,MTThextF
+CSC350: Programming Fundamentals,7,"Jiang, Kevin",2,M202,MTWextF
+CSC450: Languages of the Web,6,"Bednarcik, Meg",1,M101,MTThextF
+CSC500A: AP Computer Science (I),1,"Bednarcik, Meg",1,M103,MTWextF
+CSC500A: AP Computer Science (I),2,"Litvin, M.M.",2,M103,MTWextF
+CSC500A: AP Computer Science (I),3,"Bednarcik, Meg",3,M103,MTThextF
+CSC500A: AP Computer Science (I),4,"Litvin, M.M.",4,M113,MTThextF
+CSC500A: AP Computer Science (I),6,"Zufelt, Nicholas",5,M103,MTThextF
+CSC500A: AP Computer Science (I),7,"Bednarcik, Meg",6,M103,MTWextF
+CSC630: Honors Computer Science Seminar,3,"Zufelt, Nicholas",1,M306,MTThextF
+CSC630: Honors Computer Science Seminar,7,"Zufelt, Nicholas",2,M201,MTWextF
+EBI09: Foundations,TBA,"Candelario Escobar, A.",1,M302,TBA
+EBI09: Foundations,TBA,"Cormier, S.",2,B210,TBA
+EBI09: Foundations,TBA,"Dolan, K. A.",3,B203,TBA
+EBI09: Foundations,TBA,"Elliott, J. K.",4,WC121,TBA
+EBI09: Foundations,TBA,"Esty, Susan",5,BB13,TBA
+"ENG200A: Writing to Read, Reading to Write",2,"Tapia, Jineyda",6,B202,MWextF
+"ENG200A: Writing to Read, Reading to Write",2,"Nyamwaya, E.O.",7,B102,MWextF
+"ENG200A: Writing to Read, Reading to Write",2,"Tortorella, P.F.",8,BB05,MWextF
+"ENG200A: Writing to Read, Reading to Write",3,"Scott, N.S.",9,B202,TThextF
+"ENG200A: Writing to Read, Reading to Write",3,"Nyamwaya, E.O.",10,BB09,TThextF
+"ENG200A: Writing to Read, Reading to Write",3,"Erdmann, Sara",11,B211,TThextF
+"ENG200A: Writing to Read, Reading to Write",4,"Scott, N.S.",12,B211,MThextF
+"ENG200A: Writing to Read, Reading to Write",4,"Driscoll, Sarah",13,BB10,MThextF
+"ENG200A: Writing to Read, Reading to Write",4,"Tortorella, P.F.",14,B207,MThextF
+"ENG200A: Writing to Read, Reading to Write",5,"Scott, N.S.",15,BB05,TThextF
+"ENG200A: Writing to Read, Reading to Write",5,"Tapia, Jineyda",16,B105,TThextF
+"ENG200A: Writing to Read, Reading to Write",6,"Nyamwaya, E.O.",17,BB09,MThextF
+"ENG200A: Writing to Read, Reading to Write",6,"Tapia, Jineyda",18,B107,MThextF
+"ENG200A: Writing to Read, Reading to Write",6,"Erdmann, Sara",19,B210,MThextF
+"ENG200A: Writing to Read, Reading to Write",7,"Quijas, Jen",20,B202,TWextF
+"ENG200A: Writing to Read, Reading to Write",7,"Driscoll, Sarah",21,BB10,TWextF
+"ENG200A: Writing to Read, Reading to Write",7,"Talarico, Ben",22,BB13,TWextF
+"ENG200A: Writing to Read, Reading to Write",7,"Guerrero, D.",23,B203,TWextF
+ENG300A: The Stories of Literature,1,"Heffernan, K.",1,B201,MTWextF
+ENG300A: The Stories of Literature,1,"Gardner, D.C.",2,B207,MTWextF
+ENG300A: The Stories of Literature,1,"Fox, D.U.",3,B211,MTWextF
+ENG300A: The Stories of Literature,2,"Bird, J.E.",4,B105,MTWextF
+ENG300A: The Stories of Literature,2,"Long, L.N.",5,B201,MTWextF
+ENG300A: The Stories of Literature,2,"Kane, T.H.",6,B205,MTWextF
+ENG300A: The Stories of Literature,3,"Har, P.R.",7,WC121,MTThextF
+ENG300A: The Stories of Literature,3,"Driscoll, Sarah",8,BB10,MTThextF
+ENG300A: The Stories of Literature,3,"Long, L.N.",9,B203,MTThextF
+ENG300A: The Stories of Literature,3,"Kane, T.H.",10,B205,MTThextF
+ENG300A: The Stories of Literature,4,"Martin, Coreen",11,B102,MTThextF
+ENG300A: The Stories of Literature,4,"Bird, J.E.",12,B105,MTThextF
+ENG300A: The Stories of Literature,4,"Long, L.N.",13,B203,MTThextF
+ENG300A: The Stories of Literature,4,"Fulton, M.L.",14,B210,MTThextF
+ENG300A: The Stories of Literature,5,"Driscoll, Sarah",15,BB10,MTThextF
+ENG300A: The Stories of Literature,5,"Har, P.R.",16,B211,MTThextF
+ENG300A: The Stories of Literature,6,"Martin, Coreen",17,B203,MTThextF
+ENG300A: The Stories of Literature,6,"Wilkin, G.J.",18,B205,MTThextF
+ENG300A: The Stories of Literature,7,"Fulton, M.L.",19,B107,MTWextF
+ENG300A: The Stories of Literature,7,"Martin, Coreen",20,BB05,MTWextF
+ENG300A: The Stories of Literature,7,"Erdmann, Sara",21,B210,MTWextF
+ENG300A: The Stories of Literature,3,"Richie, G.F.",22,B107,MTThextF
+ENG300A: The Stories of Literature,4,"Richie, G.F.",23,B211,MTThextF
+"ENG301A: Stories of Lit., New Uppers",3,"Staffaroni, E.R.",1,BB13,MTThextF
+"ENG301A: Stories of Lit., New Uppers",6,"Staffaroni, E.R.",2,BB13,MTThextF
+ENG495: Strangers in a Strange Land,2,"Chase, D.M.",1,BB13,MWextF
+ENG498: American Studies for Int'l. Students,7,"Vidal, F.M.",1,B201,TWextF
+ENG501WT: Writing for Change,6,"Bernieri, L.M.",1,BB10,MThextF
+ENG505CF: Creative Writing: Fiction,7-Jun,"Lane, J.M.",1,B105,"TextFext - per 6&7, T&F"
+ENG505CP: Creative Writing: Poetry,7-Jun,"Lane, J.M.",1,B105,"MextThext - per 6&7 Mon, per 6"
+ENG510GL: Gothic Literature,3,"Tortorella, P.F.",1,B207,TThextF
+ENG514JO: Journalism,1,"Scott, N.S.",1,BB05,TWextF
+ENG517LA: Last Acts: Remember Me?,4,"Kane, T.H.",1,B205,MThextF
+ENG521AI: African Identities in Am Lit,7,"Nyamwaya, E.O.",1,B205,TWextF
+ENG521FF: Feasts and Fools,5,"Wilkin, G.J.",1,B205,TThextF
+ENG521LL: Law and Literature,6,"Calleja, L.R.",1,B207,MThextF
+ENG524TS: Rememories: Trauma and Survival,3,"McQuade, K.J.",1,BB05,TThextF
+ENG524TS: Rememories: Trauma and Survival,4,"McQuade, K.J.",2,B202,MThextF
+ENG529DA: Dictatorship and the Artist,5,"Curci, S.E.",1,B202,TThextF
+ENG530WC: What Is Critique?,2,"Fox, D.U.",1,B207,MWextF
+ENG531AW: August Wilson's View 1900-1940,1,"Grimm, A.R.",1,GWTW,TWextF
+HSS300A: The United States,1,"Rachlin, N.A.",4,S204,TWextF
+HSS300A: The United States,2,"Slater, D.A.",5,SB01,MWextF
+HSS300A: The United States,2,"Elliott, J./Palfrey, J.",6,S104,MWextF
+HSS300A: The United States,2,"Ainsworth, T.E.",7,S201,MWextF
+HSS300A: The United States,3,"Slater, D.A.",8,SB01,TThextF
+HSS300A: The United States,3,"Ramos, M.",9,S104,TThextF
+HSS300A: The United States,3,"Ainsworth, T.E.",10,S201,TThextF
+HSS300A: The United States,4,"Hession, M.C.",11,SB05,MThextF
+HSS300A: The United States,4,"Ballout, L.K.",12,S102,MThextF
+HSS300A: The United States,5,"Ballout, L.K.",13,S102,TThextF
+HSS300A: The United States,5,"Ramos, M.",14,S104,TThextF
+HSS300A: The United States,6,"Hession, M.C.",15,SB05,MThextF
+HSS300A: The United States,6,"Villanueva, M.",16,S201,MThextF
+HSS300A: The United States,7,"Dahm, Clair",17,SB03,TWextF
+HSS300A: The United States,7,"Fritz, T.",18,SB04,TWextF
+HSS300A: The United States,7,"Hession, M.C.",19,SB05,TWextF
+HSS300A: The United States,7,"Sanchez, J.",20,S203,TWextF
+HSS300C: The United States,1,"Frey, E.",21,S203,TWextF
+HSS300C: The United States,2,"Frey, E.",22,S203,MWextF
+HSS320A: Topics in US Hist International Students,2,"Doheny, M.A.",1,SB02,MWextF
+HSS495: Senior Research and Writing Seminar,4,"Fritz, T.",1,SB04,MThextF
+HSS501: Economics I: Microeconomics,1,"McQuade, J.",1,S202,TWextF
+HSS501: Economics I: Microeconomics,2,"Parker, T.R.",2,S202,MWextF
+HSS501: Economics I: Microeconomics,4,"Monroe, E.A.",3,S202,MThextF
+HSS501: Economics I: Microeconomics,5,"Parker, T.R.",4,S202,TThextF
+HSS541: Europe I,1,"Blunt, N.K.",1,S104,TWextF
+HSS552: Europe 1914-1945: War and Peace,3,"Mulligan, M.M.",1,S101,TThextF
+HSS561: Race & Identity in Indian Country,6,"Doheny, M.A.",1,PEAB,MThextF
+"HSS565: The American Civil War, 1845-1877",7,"Jones, C.L.",1,S204,TWextF
+HSS572: A History of 1968,2,"Hession, M.C.",1,SB05,MWextF
+HSS577: Schooling in America,3,"Rachlin, N.A.",1,S204,TThextF
+"HSS583: Shamans, Sacrifices and Ceremony",7,"Slater, D.A.",1,SB01,TWextF
+"JPN100A: Japanese, First Level",7,"Shimazu, T.",1,S114,MTWextF
+JPN200A: Second-Level Japanese,4,"Shimazu, T.",1,S114,MTThextF
+JPN300A: Third-Level Japanese,3,"Shimazu, T.",1,S114,MTThF
+JPN400A: Fourth-Level Japanese,5,"Shimazu, T.",1,S114,MTThF
+JPN520A: Japanese Language and Culture,5,"Shimazu, T.",1,S114,MTThF
+JPN601: Advanced Japanese,5,"Shimazu, T.",1,S114,MTThF
+LTN100A: First-Level Latin,3,"Carter, C.J.",1,PA,MTThextF
+"LTN150A: First- and Second-Level Latin, Intensive",2,"Mann, J.D.",1,PA,MTWextF
+LTN200A: Second-Level Latin,2,"Kip, N.V.",1,PD,MTWextF
+LTN300A: Third-Level Latin,4,"Carter, C.J.",1,PA,MTThF
+LTN300A: Third-Level Latin,5,"Carter, C.J.",2,PA,MTThF
+LTN300A: Third-Level Latin,3,"Kip, N.V.",3,PD,MTThF
+LTN520A: Vergil/Caesar,2,"Meyer, E.A.",1,PG,MTWextF
+LTN601: Advanced Latin Authors,7,"Mann, J.D.",1,PA,MTWF
+MTH100A: Elementary Algebra,1,"Farrell, P.J.",1,M302,MTWextF
+MTH100A: Elementary Algebra,2,"Joseph, E.C.",2,M306,MTWextF
+MTH100A: Elementary Algebra,3,"Buckwalter, S.E.",3,GB313,MTThextF
+MTH190: Elementary Algebra,1,"Kost, Donnie",1,M207,MTWextF
+MTH190: Elementary Algebra,2,"Kost, Donnie",2,M207,MTWextF
+MTH190: Elementary Algebra,3,"McHugh, M.J.",3,M208,MTThextF
+MTH190: Elementary Algebra,5,"Greenberg, E.M.",4,M201,MTThextF
+MTH190: Elementary Algebra,6,"Greenberg, E.M.",5,M201,MTThextF
+MTH210: Geometry,3,"Wall, H.E.",1,M307,MTThextF
+MTH210: Geometry,5,"Wall, H.E.",2,M307,MTThextF
+MTH210: Geometry,1,"Murphy, P.D.",3,M208,MTWextF
+MTH220: Geometry,2,"Fulford, S.",1,M303,MTWextF
+MTH280A: Geometry and Precalculus,4,"DoBa, K.",1,M207,MTThextF
+MTH590A: BC Calculus (II),4,"Odden, C.T.",8,M301,MTThextF
+MTH590A: BC Calculus (II),6,"Joseph, E.C.",9,M306,MTThextF
+MTH590A: BC Calculus (II),7,"Litvin, M.M.",10,M307,MTWextF
+MTH590A: BC Calculus (II),7,"Joseph, E.C.",11,M306,MTWextF
+MTH595A: AP Accelerated BC Calculus,4,"McHugh, M.J.",1,M208,MTThextF
+MTH630: Honors Mathematics Seminar,4,"Zufelt, Nicholas",1,M306,MTThextF
+MTH650A: Multivariable Calculus & Linear Algebra,2,"Schneider, D.J.",1,M302,MTWextF
+MTH650A: Multivariable Calculus & Linear Algebra,5,"Knudson, K.",2,M306,MTThextF
+MTH650A: Multivariable Calculus & Linear Algebra,6,"Knudson, K.",3,M307,MTThextF
+MTH650A: Multivariable Calculus & Linear Algebra,7,"Schneider, D.J.",4,M302,MTWextF
+MUS225: The Nature of Music A,1,"Monaco, V.J.",1,G201,MTWextF
+MUS225: The Nature of Music A,2,"Monaco, V.J.",2,G201,MTWextF
+MUS225: The Nature of Music A,3,"Landolt, C.R.",3,G203,MTThextF
+MUS225: The Nature of Music A,5,"Lorenco, P.A.",4,G202,MTThextF
+MUS225: The Nature of Music A,6,"Lorenco, P.A.",5,G202,MTThextF
+MUS225: The Nature of Music A,7,"Cirelli, P.M.",6,G201,MTWextF
+MUS225: The Nature of Music A,5,"Landolt, C.R.",7,G201,MTThextF
+MUS235: The Nature of Music B,1,"Aureden, E.G.",1,G203,MTWextF
+MUS235: The Nature of Music B,2,"Aureden, E.G.",2,G203,MTWextF
+MUS235: The Nature of Music B,6,"Barnes, H.A.",3,G201,MTThextF
+MUS330: Survey of Music History,7,"Lorenco, P.A.",1,G202,MTWextF
+MUS350: Understanding and Making Music,3,"Monaco, V.J.",1,G201,MTThextF
+MUS400: Introduction to Theory and Composition,5,"Jacoby, D.B.",1,G203,MTThextF
+MUS400: Introduction to Theory and Composition,6,"Jacoby, D.B.",2,G203,MTThextF
+MUS900: Chorus,eve,"Siegfried, A.H.",1,CHOI,"T,Th 6:20-7:50"
+MUS901: Fidelio Society,eve,"Siegfried, A.H.",1,CHOI,"M 6:20-7:50, Th 5:30-6:30"
+MUS902: Band,eve,"Monaco, V./Cirelli, P.",1,GRTI,"T,Th 6:20-7:50"
+MUS903: Jazz Band,eve,"Cirelli, P.M.",1,GRTI,M 6:20 - 7:50
+MUS905: Amadeus Chamber Ensemble,eve,"Aureden, E.G.",1,GRTI,Th 6:20-7:50
+MUS906: Chamber Orchestra,eve,"Jacoby, D.B.",1,GRTI,Th 6:20-7:50
+PHD200: Physical Education,1,"Modeste, L. A.",1,GYM,MTWextF
+PHD200: Physical Education,1,"Birecki, K.A.",2,GYM,MTWextF
+PHD200: Physical Education,2,"Kuta, M.J.",3,GYM,MTWextF
+PHD200: Physical Education,3,"Kennedy, K.A.",4,GYM,MTThextF
+PHD200: Physical Education,4,"Kennedy, K.A.",5,GYM,MTThextF
+PHD200: Physical Education,5,"Dolan, K. A.",6,GYM,MTThextF
+PHD200: Physical Education,6,"Fenton, M.G.",7,GYM,MTThextF
+PHR310: Religions of the Book,7,"Prescott, Kurt",1,C15,MTWextF
+PHR340: Introduction to Ethics,1,"Bhardwaj, Kiran",1,C16,MTWextF
+PHR340: Introduction to Ethics,2,"Bhardwaj, Kiran",2,C16,MTWextF
+PHR360: Proof and Persuasion,4,"Bhardwaj, Kiran",1,C16,MTThextF
+PHR370: Views of Human Nature,3,"Prescott, Kurt",1,C15,MTThextF
+PHR370: Views of Human Nature,6,"Prescott, Kurt",2,C15,MTThextF
+PHR410: Religion in America,1,"Prescott, Kurt",1,C15,MTWextF
+PHR420: Responses to the Holocaust,5,"Housiaux, J.A.",1,C15,MTThextF
+PHR430: Law and Morality,6,"Bhardwaj, Kiran",1,C16,MTThextF
+PHR460: Ethics: Medicine,3,"Housiaux, J.A.",1,C16,MTThextF
+PHR500: Existentialism,2,"Housiaux, J.A.",1,C15,MTWextF
+PHY300A: Introduction to Physics,2,"Artacho Guerra, C.",1,GB211,MTWextF
+PHY300A: Introduction to Physics,3,"Artacho Guerra, C.",2,GB211,MTThextF
+PHY300A: Introduction to Physics,6,"Artacho Guerra, C.",3,GB211,MTThextF
+PHY400A: College Physics I,1,"Whitesides, L.",1,GB206,MTWextF
+PHY400A: College Physics I,1,"Yao, F.",2,GB210,MTWextF
+PHY400A: College Physics I,2,"Rea, D.P.",3,GB206,MTWextF
+PHY400A: College Physics I,2,"Yao, F.",4,GB210,MTWextF
+PHY400A: College Physics I,3,"Rea, D.P.",5,GB206,MTThextF
+PHY400A: College Physics I,3,"Golini, Tracey",6,GB210,MTThextF
+,,,,,
+,,,,,
+THD210: Acting I,3,"Heelan, K. P.",1,GWTW,TThextF
+THD210: Acting I,7,"Heelan, K. P.",2,GWTW,TWextF
+THD210: Acting I,4,"Grimm, A.R.",3,GWTW,MThextF
+THD320: Lighting,5,"Murray, B.W.",1,GWTG,TThextF
+THD321: Costuming,7,"Murray, B.W.",1,GWCS,TWextF
+THD420: Public Speaking,4,"Heelan, K. P.",1,GWST,MThextF
+THD420: Public Speaking,6,"Heelan, K. P.",2,GWST,MThextF
+THD510: Advanced Acting,2,"Grimm, A./Griffith, L.",1,GWTW,MTWextF
+THD531: August Wilson's View 1900-1940,1,"Grimm, A.R.",1,GWTW,TWextF
+THD920: Play Production,7-Jun,"Strong, E.E.",1,GWTG,MextTThextF

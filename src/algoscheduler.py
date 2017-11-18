@@ -350,7 +350,7 @@ if __name__=="__main__":
     """Main procedure for generating schedules"""
     # Add students
 
-    cap = 2
+    cap = 10
 
     engine = create_engine(CONNECT_STRING, module=sqlite, echo=DEBUG)
     Session = sessionmaker(bind=engine)

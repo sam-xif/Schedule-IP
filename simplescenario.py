@@ -33,14 +33,14 @@ if __name__=="__main__":
     addClassesToDB()
 
     # Add students
-    addStudentsToDB(20)
+    addStudentsToDB(10)
 
     # Add requests
     addRequestsToDB()
 
     # Run scheduler
 
-    cap = 18
+    cap = 5
 
     engine = create_engine(CONNECT_STRING, module=sqlite)
     Session = sessionmaker(bind=engine)
@@ -54,9 +54,16 @@ if __name__=="__main__":
     classes = [pymodels.Class.__import__(x) for x in session1.query(models.Class).all()]
 
     for c in classes:
-        c.slotsRemaining = cap
+        c.targetCapacity = cap
 
     scheduler = HungarianScheduler(students, requests, classes, session1)
     scheduler.generateSchedule()
+
+    tuples = [(match.y.data[0].student.name, match.x.data.classCode) for match in scheduler.graph.matching]
+    tuples.sort(key=lambda x: x[0])
+    
+    for name, course in tuples:
+        print('{} -> {}'.format(name, course))
+
 
     print("DONE")

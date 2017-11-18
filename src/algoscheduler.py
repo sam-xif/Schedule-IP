@@ -4,6 +4,8 @@ File containing implementations of scheduling algorithms.
 
 import sys
 import os
+import itertools
+
 if __name__=='__main__':
     sys.path.append(os.path.realpath('../')) # Assuming the script is run from within the src directory
 
@@ -11,6 +13,7 @@ from tqdm import tqdm
 
 from src.scheduler import *
 from src.bipartitegraph import BipartiteGraph, Edge
+from src.vertexgroup import VertexGroup, Vertex
 
 class HungarianScheduler(BasicScheduler):
     """
@@ -34,11 +37,13 @@ class HungarianScheduler(BasicScheduler):
         # Generate cost matrix
 
     def edgeCost(self, x, y):
+        # Assume x and y are Vertex objects
+
         # Define preference cost function
         prefCostFunc = lambda x : x**2
 
         # Get some info from the requests object
-        req = self.graph.x[x][0]
+        req = x.data[0]
         if req is None: # i.e. Dummy student required to even out the two sides of the graph. Cost is 0
             return 0
 
@@ -49,11 +54,10 @@ class HungarianScheduler(BasicScheduler):
                                 [req.course5, req.c5alt1, req.c5alt2, req.c5alt3]]
         student = req.student
 
-        ynode = self.graph.y[y]
         for course in requests:
             for i, alternate in enumerate(course):
                 if alternate != '':
-                    if ClassCode.getClassCodeFromTitle(alternate) == ClassCode.getClassCodeFromTitle(ynode.classCode):
+                    if ClassCode.getClassCodeFromTitle(alternate) == ClassCode.getClassCodeFromTitle(y.data.classCode):
                         return prefCostFunc(i)
 
         # TODO: Change this: Instead of returning absurdly high cost, make it so edges that connect students to course they didn't ask for are disallowed.
@@ -105,7 +109,7 @@ class HungarianScheduler(BasicScheduler):
         # We use self.requests instead of self.student because the Request object contains a reference to the student as well as the course request data
         # This is useful for calculating the weights of the edges
         for r in self.requests:
-            left.extend([(r, p) for p in range(1, 8)])
+            left.extend([Vertex((r, p)) for p in range(1, 8)])
 
         courseGroups = {}
 
@@ -118,10 +122,11 @@ class HungarianScheduler(BasicScheduler):
                     courseGroups[code] = []
                     index = len(right)
                     for c in courseDict[code]:
+                        right.append(VertexGroup(c, c.targetCapacity))
                         for s in range(c.targetCapacity):
                             courseGroups[code].append(index)
                             index += 1
-                            right.append(c)
+                            #right.append(c)
 
         # Even out the graph
         #while len(left) < len(right):
@@ -129,26 +134,28 @@ class HungarianScheduler(BasicScheduler):
 
         self.graph = BipartiteGraph(left, right)
 
-        print("Populating graph with edges...\n")
         # Generate initial collection of edges
-        for i, x in enumerate(tqdm(self.graph.x, ascii=True)):
-            for j, y in enumerate(self.graph.y):
-                self.graph.edges.append(Edge(i, j, self.graph, direction=0))
+        for i, x in enumerate(tqdm(self.graph.x, ascii=True, desc="populating graph")):
+            for group in self.graph.y:
+                for y in group:
+                    e = Edge(x, y, self.graph, direction=0)
+                    e.setCost(self.edgeCost(x, y))
+                    self.graph.edges.append(e)
 
 
-        print("\nGenerating cost matrix...\n")
-        self.generateCostMatrix(len(self.graph.x), len(self.graph.y), courseGroups)
+        #print("\nGenerating cost matrix...\n")
+        #self.generateCostMatrix(len(self.graph.x), len(self.graph.y), courseGroups)
 
         self.tightEdges = []
 
         # Initialize potential
-        self.potentialX = [0 for x in range(len(self.graph.x))]
-        self.potentialY = [0 for x in range(len(self.graph.y))]
+        #self.potentialX = [0 for x in range(len(self.graph.x))]
+        #self.potentialY = [0 for x in range(len(self.graph.y))]
 
         """
         in the BipartiteGraph that is used in this function,
-         the matching variable stores the set of edges directed from x -> y.
-        Initially, edges are created that are directed from y -> x.
+         the matching variable stores the set of edges directed from y -> x.
+        Initially, edges are created that are directed from x -> y.
 
         The algorithm also maintains that all edges in the matching are tight.
         """
@@ -156,70 +163,80 @@ class HungarianScheduler(BasicScheduler):
         # while we have not reached a perfect matching
         while len(self.graph.matching) < len(self.graph.x):
             # Gets a list of tight edges in graph
-            print("getting tight edges...")
             self.tightEdges = [edge 
-                          for edge in tqdm(self.graph.edges, ascii=True)
-                          if self.getCostOfEdge(edge.xn, edge.yn) == self.potentialX[edge.xn] + self.potentialY[edge.xn]]
+                          for edge in tqdm(self.graph.edges, ascii=True, desc="getting tight edges")
+                          if edge.isTight()]
 
             self.graph.matching = set([x for x in self.tightEdges if x.direction == 1])
 
             print("generating subsets...")
-            X = set([(0, x) for x in range(len(self.graph.x))])
-            Y = set([(1, x) for x in range(len(self.graph.y))])
-            r_x = X - set([(0, x.xn) for x in self.graph.matching])
-            r_y = Y - set([(1, x.yn) for x in self.graph.matching])
+            X = set([(0, x) for x in self.graph.x])
+            Y = set(itertools.chain.from_iterable([[(1, y) for y in x] for x in self.graph.y]))
+            r_x = X - set([(0, x.x) for x in self.graph.matching])
+            r_y = Y - set([(1, x.y) for x in self.graph.matching])
 
-            tightEdgesXs = [edge.xn for edge in self.tightEdges]
+            tightEdgesXs = [edge.x for edge in self.tightEdges]
 
             # Gets a list of the edges that start in r_x
             tightEdgesFrom_r_x = [edge
                                   for edge in self.tightEdges
                                   if edge.direction == 0
-                                  and edge.xn in tightEdgesXs]
+                                  and edge.x in tightEdgesXs]
 
             # Perform a breadth-first search through the collection of tight edges from r_x
             Z = set()
             paths = []
             queue = []
-
+            print("Executing breadth-first search...")
             for i, edge in enumerate(tightEdgesFrom_r_x):
                 # Two extra tags are added to the end of each tuple here
                 # The 3rd value is the number of the path
                 # The 4th value indicates the position of the node in the path
-                queue.append((0, edge.xn, i, 0))
+                queue.append((0, edge.x, i, 0))
 
             while len(queue) > 0:
                 vertex = queue.pop(0)
                 Z.add((vertex[0], vertex[1]))
                 paths.append(vertex)
-                for edge in self.tightEdges:
-                    if vertex[0] == 0 and edge.xn == vertex[1] and edge.direction == 0:
-                        queue.append((1, edge.yn, vertex[2], vertex[3] + 1))
-                    elif vertex[0] == 1 and edge.yn == vertex[1] and edge.direction == 1:
-                        queue.append((0, edge.xn, vertex[2], vertex[3] + 1))
+                for edge in vertex[1].edges:
+                    if edge.isTight():
+                        queue.append((1 - edge.direction, edge.y, vertex[2], vertex[3] + 1))
 
             intersection = r_y & Z
             if len(intersection):
                 # reverse the orientation of paths[0]
-                path = []
-                for i in range(max([x[2] for x in paths]) + 1):
-                    path = [x for x in paths if x[2] == i]
-                    if len(path) % 2 == 0:
-                        break
-
+                print("sorting path")
+                paths.sort(key=lambda x: x[2])
+                
+                index = 0
+                while paths[index][2] == 0: index += 1
+                path = paths[0:index]
                 path.sort(key=lambda x: x[3])
+                
+                fullpath = []
+                counter = 0
+                while path[counter][3] == counter: 
+                    fullpath.append(path[counter])
+                    counter += 1
 
-                for i in range(len(path) - 1):
-                    for edge in self.graph.edges:
-                        if path[i][0] == 0 and edge.direction == 0:
-                            if edge.xn == path[i][1] and edge.yn == path[i+1][1]:
-                                edge.flip()
-                                print("Edge flipped")
-                        if path[i][0] == 1 and edge.direction == 1:
-                            if edge.yn == path[i][1] and edge.xn == path[i+1][1]:
-                                edge.flip()
-                                print("Edge flipped")
+                if len(fullpath) % 2 == 1: fullpath = fullpath[0:len(fullpath) - 1]
+
+                pathEdges = []
+                for u, v in zip(fullpath, fullpath[1:]):
+                    for edge in u[1].edges:
+                        if edge.y == v[1]:
+                            pathEdges.append(edge)
+
+                for edge in pathEdges:
+                    print("Edge flipped")
+                    edge.flip()
+                    if edge.direction == 1:
+                        self.graph.matching.add(edge)
+                    else:
+                        self.graph.matching.remove(edge)
             else:
+
+
                 i = Z & X
                 j = Y - Z
                 

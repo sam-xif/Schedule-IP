@@ -5,42 +5,62 @@ Implementation of bipartite graph
 from src.classcode import ClassCode
 
 class Edge:
-    def __init__(self, xn, yn, graph, direction=None):
+    def __init__(self, x, y, graph, direction):
         """
-        direction is an optional parameter that is None by default.
-        If it is set to 0, the direction is from x -> y
-        If it is set to 1, the direction is from y -> x
+        x should be the vertex where the edge starts
+        y should be the vertex where the edge ends
+        edges are assumed to be directed unless direction is None
         """
         if direction != 0 and direction != 1 and direction is not None:
             raise Exception("Invalid value for direction")
 
-        self.xn = xn
-        self.yn = yn
+        self.x = x
+        self.y = y
         self.directed = direction is not None
         self.direction = direction
         self.graph = graph
+        self.cost = 0
+
+        if direction == 0:
+            self.x.edges.append(self)
+        else:
+            self.y.edges.append(self)
 
     def getTuple(self):
-        if directed:
-            if direction == 1:
-                return (self.graph.x[self.xn], self.graph.y[self.yn])
+        if self.directed:
+            if self.direction == 1:
+                return (x, y)
             else:
-                return (self.graph.y[self.yn], self.graph.x[self.xn])
+                return (y, x)
         else:
-            return (self.graph.x[self.xn], self.graph.y[self.yn])
+            return (x, y)
 
     def flip(self):
         if self.directed:
-            self.direction = 1 if self.directed == 0 else 0
-        #tmp = self.xn
-        #self.xn = self.yn
-        #self.yn = tmp
+            if self.direction == 1:
+                self.direction = 0
+                self.y.edges.remove(self)
+                self.x.edges.append(self)
+            else:
+                self.direction = 1
+                self.x.edges.remove(self)
+                self.y.edges.append(self)
 
+            tmp = self.x
+            self.x = self.y
+            self.y = tmp
+
+    def setCost(self, cost):
+        self.cost = cost
+
+    def isTight(self):
+        return self.cost == self.x.potential + self.y.potential
+                
     def __eq__(self, other):
-        return self.xn == other.xn and self.yn == other.yn and self.direction == other.direction
+        return self.x == other.x and self.y == other.y and self.direction == other.direction
 
     def __hash__(self):
-        return self.xn + self.yn + (0 if self.direction is None else self.direction)
+        return self.x.__hash__() + self.y.__hash__() + (0 if self.direction is None else self.direction)
 
 class BipartiteGraph:
     def __init__(self, x, y):

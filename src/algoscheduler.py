@@ -108,14 +108,14 @@ class HungarianScheduler(BasicScheduler):
         left = []
         # We use self.requests instead of self.student because the Request object contains a reference to the student as well as the course request data
         # This is useful for calculating the weights of the edges
-        for r in self.requests:
+        for r in tqdm(self.requests, ascii=True, desc="initializing left"):
             left.extend([Vertex((r, p)) for p in range(1, 8)])
 
         courseGroups = {}
 
         # Generate nodes for spots in classes
         right = []
-        for courseName in requestedCourses:
+        for courseName in tqdm(requestedCourses, ascii=True, desc="initializing right"):
             if courseName != '':
                 code = ClassCode.getClassCodeFromTitle(courseName)
                 if code in courseDict:
@@ -160,35 +160,43 @@ class HungarianScheduler(BasicScheduler):
         The algorithm also maintains that all edges in the matching are tight.
         """
 
+        print("generating subsets...")
+        X = set([(0, x) for x in self.graph.x])
+        Y = set(itertools.chain.from_iterable([[(1, y) for y in x] for x in self.graph.y]))
+        r_x = X - set([(0, x.x) for x in self.graph.matching]) # Initially this set is all of X
+        r_y = Y - set([(1, x.y) for x in self.graph.matching]) # Initially this set is all of Y
+
+        # Flag set to true if a potential change occured, which indicates the need to refresh the tight edge list
+        potentialChange = True
+
         # while we have not reached a perfect matching
         while len(self.graph.matching) < len(self.graph.x):
-            # Gets a list of tight edges in graph
-            self.tightEdges = [edge 
-                          for edge in tqdm(self.graph.edges, ascii=True, desc="getting tight edges")
-                          if edge.isTight()]
+            print("Current length of matching:", len(self.graph.matching))
 
-            self.graph.matching = set([x for x in self.tightEdges if x.direction == 1])
+            if potentialChange:
+                potentialChange = False
+                # Gets a list of tight edges in graph
+                self.tightEdges = [edge 
+                              for edge in tqdm(self.graph.edges, ascii=True, desc="getting tight edges")
+                              if edge.isTight()]
 
-            print("generating subsets...")
-            X = set([(0, x) for x in self.graph.x])
-            Y = set(itertools.chain.from_iterable([[(1, y) for y in x] for x in self.graph.y]))
-            r_x = X - set([(0, x.x) for x in self.graph.matching])
-            r_y = Y - set([(1, x.y) for x in self.graph.matching])
+                self.graph.matching = set([x for x in self.tightEdges if x.direction == 1])
 
-            tightEdgesXs = [edge.x for edge in self.tightEdges]
+                self.tightEdgesXs = [edge.x for edge in tqdm(self.tightEdges, ascii=True, desc="getting x-vertices of tight edges") if (0, edge.x) in r_x]
 
-            # Gets a list of the edges that start in r_x
-            tightEdgesFrom_r_x = [edge
-                                  for edge in self.tightEdges
-                                  if edge.direction == 0
-                                  and edge.x in tightEdgesXs]
+                # Gets a list of the edges that start in r_x
+                self.tightEdgesFrom_r_x = [edge
+                                        for edge in tqdm(self.tightEdges, ascii=True, desc="getting tight edges that start in r_x")
+                                        if edge.direction == 0
+                                        and edge.x in self.tightEdgesXs]
+
 
             # Perform a breadth-first search through the collection of tight edges from r_x
             Z = set()
             paths = []
             queue = []
             print("Executing breadth-first search...")
-            for i, edge in enumerate(tightEdgesFrom_r_x):
+            for i, edge in enumerate(self.tightEdgesFrom_r_x):
                 # Two extra tags are added to the end of each tuple here
                 # The 3rd value is the number of the path
                 # The 4th value indicates the position of the node in the path
@@ -196,11 +204,15 @@ class HungarianScheduler(BasicScheduler):
 
             while len(queue) > 0:
                 vertex = queue.pop(0)
-                Z.add((vertex[0], vertex[1]))
-                paths.append(vertex)
-                for edge in vertex[1].edges:
-                    if edge.isTight():
-                        queue.append((1 - edge.direction, edge.y, vertex[2], vertex[3] + 1))
+                
+                if (vertex[0], vertex[1]) not in Z:
+                    paths.append(vertex)
+                    for edge in vertex[1].edges:
+                        if edge.isTight():
+                            queue.append((1 - edge.direction, edge.y, vertex[2], vertex[3] + 1))
+
+
+                    Z.add((vertex[0], vertex[1]))
 
             intersection = r_y & Z
             if len(intersection):
@@ -229,11 +241,44 @@ class HungarianScheduler(BasicScheduler):
 
                 for edge in pathEdges:
                     print("Edge flipped")
+                    try:
+                        if edge.direction == 0:
+                            self.tightEdgesFrom_r_x.remove(edge)
+                        else:
+                            self.tightEdgesFrom_r_x.append(edge)
+                    except ValueError:
+                        pass
+
                     edge.flip()
                     if edge.direction == 1:
                         self.graph.matching.add(edge)
+
+                        # Expose the next edge in the group
+                        edge.x.group.exposeNext()
+                        vert = edge.x.group.getExposedVertex()
+                        r_y.add((1, vert))
+
+                        # Connect to new edge
+                        for x in tqdm(self.graph.x, ascii=True, desc="appending new edges"):
+                            #if x != edge.y:
+                            e = Edge(x, vert, self.graph, 0)
+                            e.setCost(self.edgeCost(x, vert))
+                            self.graph.edges.append(e)
+
+                        # Modify r_x and r_y
+
+                        # Remove edge from r_x and r_y because these are subsets where the vertices are not contained in the matching
+                        try:
+                            r_x.remove((0, edge.y))
+                            r_y.remove((1, edge.x))
+                        except KeyError as e:
+                            print("keyerror generated, likely because a path connected to an edge outside of r_x or r_y")
                     else:
                         self.graph.matching.remove(edge)
+
+                        # Modify r_x and r_y
+                        r_x.add((0, edge.x))
+                        r_y.add((1, edge.y))
             else:
 
 
@@ -250,6 +295,8 @@ class HungarianScheduler(BasicScheduler):
                     self.potentialX[vert] += delta
                 for m, vert in (Z & Y):
                     self.potentialY[vert] -= delta
+
+                potentialChange = True
 
 if __name__=="__main__":
     """Main procedure for generating schedules"""

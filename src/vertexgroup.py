@@ -30,12 +30,12 @@ class VertexGroup:
         self.vertices = [Vertex(data, group=self) for x in range(numClones)]
 
     def exposeNext(self):
-        if numExposed < numClones:
+        if self.numExposed < self.numClones:
             return False
         self.numExposed += 1
         return True
 
-    def getExposedEdge(self):
+    def getExposedVertex(self):
         if self.numExposed <= 0:
             raise Exception("No edges have been exposed yet")
         return self.vertices[self.numExposed - 1]

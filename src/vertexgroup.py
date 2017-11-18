@@ -23,15 +23,16 @@ class Vertex:
         return self.id.__hash__()
 
 class VertexGroup:
-    def __init__(self, data, numClones, tag=None):
-        self.data = data
-        self.numClones = numClones
+    def __init__(self, vertices, tag=None):
+        self.vertices = vertices
+        for v in self.vertices:
+            v.group = self
         self.numExposed = 1
-        self.vertices = [Vertex(data, group=self) for x in range(numClones)]
+        #self.vertices = [Vertex(data, group=self) for x in range(numClones)]
         self.tag = tag
 
     def exposeNext(self):
-        if self.numExposed < self.numClones:
+        if self.numExposed < len(self.vertices):
             return False
         self.numExposed += 1
         return True

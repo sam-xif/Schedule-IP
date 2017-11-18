@@ -38,12 +38,12 @@ class Edge:
     def flip(self):
         if self.directed:
             if self.direction == 1:
-                self.direction = 0
-                self.y.edges.remove(self)
-                self.x.edges.append(self)
-            else:
-                self.direction = 1
                 self.x.edges.remove(self)
+                self.direction = 0
+                self.y.edges.append(self)
+            else:
+                self.x.edges.remove(self)
+                self.direction = 1
                 self.y.edges.append(self)
 
             tmp = self.x

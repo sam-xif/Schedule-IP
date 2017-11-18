@@ -9,19 +9,23 @@ import random
 
 if __name__=='__main__':
     sys.path.append(os.path.realpath('../')) # Assuming the script is run from within the src directory
+    MASTER_SCHED = 'F17-Master-Schedule-Sept27_CS.csv'
+    CONNECT_STRING = 'sqlite:///../schedule.db'
+else:
+    MASTER_SCHED = 'src/F17-Master-Schedule-Sept27_CS.csv'
+    CONNECT_STRING = 'sqlite:///schedule.db'
 
 from src import pymodels
 from src import models
 
 # Import random student generator from the integrity test module
-from integrity_test import generateStudentObject
+from src.integrity_test import generateStudentObject
 
-DEBUG=True
+DEBUG=False
 
-engine = create_engine('sqlite+pysqlite:///../schedule.db', module=sqlite, echo=DEBUG)
+engine = create_engine(CONNECT_STRING, module=sqlite, echo=DEBUG)
 Session = sessionmaker(bind=engine)
 
-MASTER_SCHED = 'F17-Master-Schedule-Sept27_CS.csv'
 
 allStudents = []
 
@@ -264,23 +268,31 @@ def generateRequests(allStudents):
     session1.commit()
     courses.close()
 
+def addStudentsToDB(numStudents):
+    session1 = Session()
+    #numStudents = int(sys.argv[2])
+
+    for i in range(numStudents):
+        session1.add(generateStudentObject())
+
+    print("Added", numStudents, "students")
+    session1.commit()
+    session1.close()
+
+def addRequestsToDB():
+    session1 = Session()
+    students = session1.query(models.Student).all()
+    session1.close()
+
+    generateRequests(students)
+
 if __name__=="__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == 'add-courses':
             addClassesToDB()
         elif sys.argv[1] == 'add-students':
-            session1 = Session()
-            numStudents = int(sys.argv[2])
-
-            for i in range(numStudents):
-                session1.add(generateStudentObject())
-
-            print("Added", numStudents, "students")
-            session1.commit()
-            session1.close()
+            addStudentsToDB(int(sys.argv[2]))
+        elif sys.argv[1] == 'add-requests':
+            addRequestsToDB()
     else:
-        session1 = Session()
-        students = session1.query(models.Student).all()
-        session1.close()
-
-        generateRequests(students)
+        print("ERROR: unknown argument")

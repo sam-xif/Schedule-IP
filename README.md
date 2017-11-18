@@ -31,3 +31,6 @@ We ended up implementing the Hungarian Algorithm as the algorithm of choice, as 
 Unfortunately, we did not have enough time to develop this into a full-scale scheduler, but we did get it working with simple scheduling scenarios.
 
 To run a simple scenario, use the command `python simplescenario.py`.
+
+A big issue we ran into while developing this algorithm was incredibly long runtimes. Those have mostly been eliminated due to various optimizations.
+Now, there are issues with students getting assigned the same course twice because there are multiple sections of it in the graph.

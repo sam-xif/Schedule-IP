@@ -122,7 +122,7 @@ class HungarianScheduler(BasicScheduler):
                     courseGroups[code] = []
                     index = len(right)
                     for c in courseDict[code]:
-                        right.append(VertexGroup(c, c.targetCapacity))
+                        right.append(VertexGroup(c, c.targetCapacity, tag=code))
                         for s in range(c.targetCapacity):
                             courseGroups[code].append(index)
                             index += 1

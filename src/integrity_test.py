@@ -20,7 +20,7 @@ from sqlite3 import dbapi2 as sqlite
 from random import *
 
 DEBUG=False
-CONNECT_STRING='sqlite:///schedule.db'
+CONNECT_STRING='sqlite:///../schedule.db'
 
 
 def randomString(length): 

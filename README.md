@@ -1,6 +1,8 @@
 # Schedule-IP
 
-## This is an Independent Project carried out by Ryan Goggins and Sam Xifaras.  The project is an exploration of the Scheduling problem - the difficulty behind assigning students to the classes that they desire without creating conflicts and having them bumped from classes.  
+### Background
+
+This repository is the result of an Independent Project carried out by Ryan Goggins and Sam Xifaras at Phillips Academy Andover. The project is an exploration of the scheduling problem - the difficult task of assigning students to the classes that they desire without creating conflicts and having them bumped from classes. 
 
 ### External Dependencies
 * `tqdm` (`pip install tqdm`)
